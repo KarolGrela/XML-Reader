@@ -38,9 +38,10 @@
             this.buttonPosinitPoints = new System.Windows.Forms.Button();
             this.buttonSegmentData = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.iconButtonMinimize = new FontAwesome.Sharp.IconButton();
             this.labelTop = new System.Windows.Forms.Label();
+            this.iconButtonExit = new FontAwesome.Sharp.IconButton();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.panelSideMenu.SuspendLayout();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -48,6 +49,8 @@
             // 
             // panelSideMenu
             // 
+            this.panelSideMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panelSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
             this.panelSideMenu.Controls.Add(this.buttonLeftBorderPanel);
             this.panelSideMenu.Controls.Add(this.labelTopLeft);
@@ -57,11 +60,10 @@
             this.panelSideMenu.Controls.Add(this.buttonSymbolicPoints);
             this.panelSideMenu.Controls.Add(this.buttonPosinitPoints);
             this.panelSideMenu.Controls.Add(this.buttonSegmentData);
-            this.panelSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSideMenu.Location = new System.Drawing.Point(0, 0);
             this.panelSideMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelSideMenu.Name = "panelSideMenu";
-            this.panelSideMenu.Size = new System.Drawing.Size(271, 622);
+            this.panelSideMenu.Size = new System.Drawing.Size(271, 544);
             this.panelSideMenu.TabIndex = 0;
             this.panelSideMenu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelSideMenu_MouseMove);
             // 
@@ -76,9 +78,10 @@
             // 
             // labelTopLeft
             // 
-            this.labelTopLeft.Cursor = System.Windows.Forms.Cursors.No;
+            this.labelTopLeft.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelTopLeft.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelTopLeft.Font = new System.Drawing.Font("Segoe UI", 15.25F);
+            this.labelTopLeft.ForeColor = System.Drawing.Color.White;
             this.labelTopLeft.Location = new System.Drawing.Point(0, 0);
             this.labelTopLeft.Name = "labelTopLeft";
             this.labelTopLeft.Size = new System.Drawing.Size(271, 92);
@@ -86,6 +89,7 @@
             this.labelTopLeft.Text = "XML Reader GUI";
             this.labelTopLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelTopLeft.Click += new System.EventHandler(this.labelTopLeft_Click);
+            this.labelTopLeft.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelTopLeft_MouseMove);
             // 
             // buttonZones
             // 
@@ -162,64 +166,89 @@
             // 
             // panelTop
             // 
+            this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.panelTop.Controls.Add(this.button1);
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(271, 0);
+            this.panelTop.Controls.Add(this.iconButtonMinimize);
+            this.panelTop.Controls.Add(this.labelTop);
+            this.panelTop.Controls.Add(this.iconButtonExit);
+            this.panelTop.Location = new System.Drawing.Point(272, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(916, 35);
+            this.panelTop.Size = new System.Drawing.Size(911, 35);
             this.panelTop.TabIndex = 1;
             this.panelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseMove);
             // 
-            // button1
+            // iconButtonMinimize
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(881, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(35, 35);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
+            this.iconButtonMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconButtonMinimize.FlatAppearance.BorderSize = 0;
+            this.iconButtonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButtonMinimize.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.iconButtonMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            this.iconButtonMinimize.IconColor = System.Drawing.Color.White;
+            this.iconButtonMinimize.IconSize = 16;
+            this.iconButtonMinimize.Location = new System.Drawing.Point(838, 0);
+            this.iconButtonMinimize.Name = "iconButtonMinimize";
+            this.iconButtonMinimize.Rotation = 0D;
+            this.iconButtonMinimize.Size = new System.Drawing.Size(35, 35);
+            this.iconButtonMinimize.TabIndex = 5;
+            this.iconButtonMinimize.UseVisualStyleBackColor = true;
+            this.iconButtonMinimize.Click += new System.EventHandler(this.iconButtonMinimize_Click);
+            this.iconButtonMinimize.MouseEnter += new System.EventHandler(this.iconButtonMinimize_MouseEnter);
+            this.iconButtonMinimize.MouseLeave += new System.EventHandler(this.iconButtonMinimize_MouseLeave);
+            // 
+            // labelTop
+            // 
+            this.labelTop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.labelTop.Font = new System.Drawing.Font("Segoe UI", 15.25F);
+            this.labelTop.Location = new System.Drawing.Point(0, 0);
+            this.labelTop.Name = "labelTop";
+            this.labelTop.Size = new System.Drawing.Size(804, 35);
+            this.labelTop.TabIndex = 3;
+            this.labelTop.Text = "Main Screen";
+            this.labelTop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelTop_MouseMove);
+            // 
+            // iconButtonExit
+            // 
+            this.iconButtonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconButtonExit.FlatAppearance.BorderSize = 0;
+            this.iconButtonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButtonExit.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.iconButtonExit.IconChar = FontAwesome.Sharp.IconChar.WindowClose;
+            this.iconButtonExit.IconColor = System.Drawing.Color.White;
+            this.iconButtonExit.IconSize = 16;
+            this.iconButtonExit.Location = new System.Drawing.Point(874, 0);
+            this.iconButtonExit.Name = "iconButtonExit";
+            this.iconButtonExit.Rotation = 0D;
+            this.iconButtonExit.Size = new System.Drawing.Size(35, 35);
+            this.iconButtonExit.TabIndex = 4;
+            this.iconButtonExit.UseVisualStyleBackColor = true;
+            this.iconButtonExit.Click += new System.EventHandler(this.iconButtonExit_Click);
+            this.iconButtonExit.MouseEnter += new System.EventHandler(this.iconButtonExit_MouseEnter);
+            this.iconButtonExit.MouseLeave += new System.EventHandler(this.iconButtonExit_MouseLeave);
             // 
             // fileSystemWatcher1
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // labelTop
-            // 
-            this.labelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.labelTop.Font = new System.Drawing.Font("Segoe UI", 15.25F);
-            this.labelTop.Location = new System.Drawing.Point(271, 0);
-            this.labelTop.Name = "labelTop";
-            this.labelTop.Size = new System.Drawing.Size(881, 35);
-            this.labelTop.TabIndex = 3;
-            this.labelTop.Text = "Main Screen";
-            this.labelTop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // FormMainMenu
             // 
-            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(1187, 622);
-            this.Controls.Add(this.labelTop);
+            this.ClientSize = new System.Drawing.Size(1183, 544);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelSideMenu);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormMainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Main Form";
             this.panelSideMenu.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
@@ -231,7 +260,6 @@
 
         private System.Windows.Forms.Panel panelSideMenu;
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonFileInfo;
         private System.Windows.Forms.Button buttonZones;
         private System.Windows.Forms.Button buttonSymbolicPointsGroups;
@@ -242,6 +270,8 @@
         private System.Windows.Forms.Label labelTopLeft;
         private System.Windows.Forms.Panel buttonLeftBorderPanel;
         private System.Windows.Forms.Label labelTop;
+        private FontAwesome.Sharp.IconButton iconButtonMinimize;
+        private FontAwesome.Sharp.IconButton iconButtonExit;
     }
 }
 

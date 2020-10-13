@@ -10,53 +10,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;   // dragging form
 
-// TODO:
-// drag from label
-// fix cursor on top left label
-// 
+
 
 namespace XML_Reader_GUI
 {
     public partial class FormMainMenu : Form
     {
-        
-        #region Mouse Drag
-
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-
-        [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        private void panelTop_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        private void panelSideMenu_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        #endregion
-        
-
-
         private Button currentButton;
        
         public FormMainMenu()
         {
             InitializeComponent();
+
+            this.DoubleBuffered = true;
+
+            // getting read of the control box
+            this.ControlBox = false;
+            this.Text = String.Empty;
+
+            // setting minimal and maximal size of the form
+            this.MinimumSize = new Size(1055, 545);
+            //this.MaximumSize = new Size(1930, 1025);
+
         }
 
        
@@ -152,7 +127,6 @@ namespace XML_Reader_GUI
         private void buttonFileInfo_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
-
         }
 
         private void buttonSegmentData_Click(object sender, EventArgs e)
@@ -188,6 +162,101 @@ namespace XML_Reader_GUI
 
         #endregion
 
+
+        #region Mouse Drag
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void panelTop_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void panelSideMenu_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void labelTop_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void labelTopLeft_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+
+        #endregion
+
+
+        #region Top Right Corner Buttons
+
+        /*
+         * Standard:
+         * First function - change color to 
+        */
+
+        // Close window button
+        private void iconButtonExit_MouseEnter(object sender, System.EventArgs e)
+        {
+            iconButtonExit.IconColor = Color.FromArgb(229,204,255);
+            iconButtonExit.ForeColor = Color.FromArgb(229, 204, 255);
+        }
+
+        private void iconButtonExit_MouseLeave(object sender, System.EventArgs e)
+        {
+            iconButtonExit.IconColor = Color.White;
+            iconButtonExit.ForeColor = Color.White;
+        }
+
+        private void iconButtonExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        // Minimize Window button
+        private void iconButtonMinimize_MouseEnter(object sender, System.EventArgs e)
+        {
+            iconButtonMinimize.IconColor = Color.FromArgb(229, 204, 255);
+            iconButtonMinimize.ForeColor = Color.FromArgb(229, 204, 255);
+        }
+
+        private void iconButtonMinimize_MouseLeave(object sender, System.EventArgs e)
+        {
+            iconButtonMinimize.IconColor = Color.White;
+            iconButtonMinimize.ForeColor = Color.White;
+        }
+
+        private void iconButtonMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        #endregion
 
     }
 }
