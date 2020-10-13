@@ -1,6 +1,6 @@
 ﻿namespace XML_Reader_GUI
 {
-    partial class Form1
+    partial class FormMainMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -28,114 +28,149 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelSideMenu = new System.Windows.Forms.Panel();
+            this.buttonLeftBorderPanel = new System.Windows.Forms.Panel();
+            this.labelTopLeft = new System.Windows.Forms.Label();
+            this.buttonZones = new System.Windows.Forms.Button();
+            this.buttonFileInfo = new System.Windows.Forms.Button();
+            this.buttonSymbolicPointsGroups = new System.Windows.Forms.Button();
+            this.buttonSymbolicPoints = new System.Windows.Forms.Button();
+            this.buttonPosinitPoints = new System.Windows.Forms.Button();
+            this.buttonSegmentData = new System.Windows.Forms.Button();
+            this.panelTop = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.labelTop = new System.Windows.Forms.Label();
+            this.panelSideMenu.SuspendLayout();
+            this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelSideMenu
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.button7);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button6);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(271, 622);
-            this.panel1.TabIndex = 0;
+            this.panelSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.panelSideMenu.Controls.Add(this.buttonLeftBorderPanel);
+            this.panelSideMenu.Controls.Add(this.labelTopLeft);
+            this.panelSideMenu.Controls.Add(this.buttonZones);
+            this.panelSideMenu.Controls.Add(this.buttonFileInfo);
+            this.panelSideMenu.Controls.Add(this.buttonSymbolicPointsGroups);
+            this.panelSideMenu.Controls.Add(this.buttonSymbolicPoints);
+            this.panelSideMenu.Controls.Add(this.buttonPosinitPoints);
+            this.panelSideMenu.Controls.Add(this.buttonSegmentData);
+            this.panelSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSideMenu.Location = new System.Drawing.Point(0, 0);
+            this.panelSideMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panelSideMenu.Name = "panelSideMenu";
+            this.panelSideMenu.Size = new System.Drawing.Size(271, 622);
+            this.panelSideMenu.TabIndex = 0;
+            this.panelSideMenu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelSideMenu_MouseMove);
             // 
-            // button7
+            // buttonLeftBorderPanel
             // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(0, 445);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(271, 70);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "Zones";
-            this.button7.UseVisualStyleBackColor = false;
+            this.buttonLeftBorderPanel.BackColor = System.Drawing.Color.White;
+            this.buttonLeftBorderPanel.Location = new System.Drawing.Point(0, 95);
+            this.buttonLeftBorderPanel.Name = "buttonLeftBorderPanel";
+            this.buttonLeftBorderPanel.Size = new System.Drawing.Size(10, 70);
+            this.buttonLeftBorderPanel.TabIndex = 2;
+            this.buttonLeftBorderPanel.Visible = false;
             // 
-            // button5
+            // labelTopLeft
             // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(0, 375);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(271, 70);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Symbolic Points Groups";
-            this.button5.UseVisualStyleBackColor = true;
+            this.labelTopLeft.Cursor = System.Windows.Forms.Cursors.No;
+            this.labelTopLeft.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelTopLeft.Font = new System.Drawing.Font("Segoe UI", 15.25F);
+            this.labelTopLeft.Location = new System.Drawing.Point(0, 0);
+            this.labelTopLeft.Name = "labelTopLeft";
+            this.labelTopLeft.Size = new System.Drawing.Size(271, 92);
+            this.labelTopLeft.TabIndex = 9;
+            this.labelTopLeft.Text = "XML Reader GUI";
+            this.labelTopLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTopLeft.Click += new System.EventHandler(this.labelTopLeft_Click);
             // 
-            // button4
+            // buttonZones
             // 
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(0, 305);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(271, 70);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Symbolic Points";
-            this.button4.UseVisualStyleBackColor = true;
+            this.buttonZones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonZones.FlatAppearance.BorderSize = 0;
+            this.buttonZones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonZones.Location = new System.Drawing.Point(0, 445);
+            this.buttonZones.Name = "buttonZones";
+            this.buttonZones.Size = new System.Drawing.Size(271, 70);
+            this.buttonZones.TabIndex = 8;
+            this.buttonZones.Text = "Zones";
+            this.buttonZones.UseVisualStyleBackColor = false;
+            this.buttonZones.Click += new System.EventHandler(this.buttonZones_Click);
             // 
-            // button3
+            // buttonFileInfo
             // 
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(0, 235);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(271, 70);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Posinit Points";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonFileInfo.FlatAppearance.BorderSize = 0;
+            this.buttonFileInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFileInfo.Location = new System.Drawing.Point(0, 95);
+            this.buttonFileInfo.Name = "buttonFileInfo";
+            this.buttonFileInfo.Size = new System.Drawing.Size(271, 70);
+            this.buttonFileInfo.TabIndex = 6;
+            this.buttonFileInfo.Text = "File Info";
+            this.buttonFileInfo.UseVisualStyleBackColor = true;
+            this.buttonFileInfo.Click += new System.EventHandler(this.buttonFileInfo_Click);
             // 
-            // button2
+            // buttonSymbolicPointsGroups
             // 
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(0, 165);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(271, 70);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Segment Data";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonSymbolicPointsGroups.FlatAppearance.BorderSize = 0;
+            this.buttonSymbolicPointsGroups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSymbolicPointsGroups.Location = new System.Drawing.Point(0, 375);
+            this.buttonSymbolicPointsGroups.Name = "buttonSymbolicPointsGroups";
+            this.buttonSymbolicPointsGroups.Size = new System.Drawing.Size(271, 70);
+            this.buttonSymbolicPointsGroups.TabIndex = 7;
+            this.buttonSymbolicPointsGroups.Text = "Symbolic Points Groups";
+            this.buttonSymbolicPointsGroups.UseVisualStyleBackColor = true;
+            this.buttonSymbolicPointsGroups.Click += new System.EventHandler(this.buttonSymbolicPointsGroups_Click);
             // 
-            // button6
+            // buttonSymbolicPoints
             // 
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(0, 95);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(271, 70);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "File Info";
-            this.button6.UseVisualStyleBackColor = true;
+            this.buttonSymbolicPoints.FlatAppearance.BorderSize = 0;
+            this.buttonSymbolicPoints.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSymbolicPoints.Location = new System.Drawing.Point(0, 305);
+            this.buttonSymbolicPoints.Name = "buttonSymbolicPoints";
+            this.buttonSymbolicPoints.Size = new System.Drawing.Size(271, 70);
+            this.buttonSymbolicPoints.TabIndex = 7;
+            this.buttonSymbolicPoints.Text = "Symbolic Points";
+            this.buttonSymbolicPoints.UseVisualStyleBackColor = true;
+            this.buttonSymbolicPoints.Click += new System.EventHandler(this.buttonSymbolicPoints_Click);
             // 
-            // panel2
+            // buttonPosinitPoints
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(271, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(916, 35);
-            this.panel2.TabIndex = 1;
+            this.buttonPosinitPoints.FlatAppearance.BorderSize = 0;
+            this.buttonPosinitPoints.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPosinitPoints.Location = new System.Drawing.Point(0, 235);
+            this.buttonPosinitPoints.Name = "buttonPosinitPoints";
+            this.buttonPosinitPoints.Size = new System.Drawing.Size(271, 70);
+            this.buttonPosinitPoints.TabIndex = 7;
+            this.buttonPosinitPoints.Text = "Posinit Points";
+            this.buttonPosinitPoints.UseVisualStyleBackColor = true;
+            this.buttonPosinitPoints.Click += new System.EventHandler(this.buttonPosinitPoints_Click);
+            // 
+            // buttonSegmentData
+            // 
+            this.buttonSegmentData.FlatAppearance.BorderSize = 0;
+            this.buttonSegmentData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSegmentData.Location = new System.Drawing.Point(0, 165);
+            this.buttonSegmentData.Name = "buttonSegmentData";
+            this.buttonSegmentData.Size = new System.Drawing.Size(271, 70);
+            this.buttonSegmentData.TabIndex = 7;
+            this.buttonSegmentData.Text = "Segment Data";
+            this.buttonSegmentData.UseVisualStyleBackColor = true;
+            this.buttonSegmentData.Click += new System.EventHandler(this.buttonSegmentData_Click);
+            // 
+            // panelTop
+            // 
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.panelTop.Controls.Add(this.button1);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(271, 0);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(916, 35);
+            this.panelTop.TabIndex = 1;
+            this.panelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseMove);
             // 
             // button1
             // 
@@ -151,51 +186,62 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "X";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label1
+            // fileSystemWatcher1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.25F);
-            this.label1.Location = new System.Drawing.Point(0, -1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(271, 94);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "XML Reader GUI";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // Form1
+            // labelTop
             // 
+            this.labelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.labelTop.Font = new System.Drawing.Font("Segoe UI", 15.25F);
+            this.labelTop.Location = new System.Drawing.Point(271, 0);
+            this.labelTop.Name = "labelTop";
+            this.labelTop.Size = new System.Drawing.Size(881, 35);
+            this.labelTop.TabIndex = 3;
+            this.labelTop.Text = "Main Screen";
+            this.labelTop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // FormMainMenu
+            // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1187, 622);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.labelTop);
+            this.Controls.Add(this.panelTop);
+            this.Controls.Add(this.panelSideMenu);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "FormMainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.panelSideMenu.ResumeLayout(false);
+            this.panelTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelSideMenu;
+        private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonFileInfo;
+        private System.Windows.Forms.Button buttonZones;
+        private System.Windows.Forms.Button buttonSymbolicPointsGroups;
+        private System.Windows.Forms.Button buttonSymbolicPoints;
+        private System.Windows.Forms.Button buttonPosinitPoints;
+        private System.Windows.Forms.Button buttonSegmentData;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Label labelTopLeft;
+        private System.Windows.Forms.Panel buttonLeftBorderPanel;
+        private System.Windows.Forms.Label labelTop;
     }
 }
 
