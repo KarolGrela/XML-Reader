@@ -9,14 +9,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;   // dragging form
+using System.IO;
+using System.Xml;
 
-
+// TODO:
+// browse for filepath
+// childforms for each button
+// decision
 
 namespace XML_Reader_GUI
 {
     public partial class FormMainMenu : Form
     {
         private Button currentButton;
+        //private OpenFileDialog openFile;
        
         public FormMainMenu()
         {
@@ -24,13 +30,12 @@ namespace XML_Reader_GUI
 
             this.DoubleBuffered = true;
 
-            // getting read of the control box
+            // getting rid of the control box
             this.ControlBox = false;
             this.Text = String.Empty;
 
-            // setting minimal and maximal size of the form
+            // setting minimal size of the form
             this.MinimumSize = new Size(1055, 545);
-            //this.MaximumSize = new Size(1930, 1025);
 
         }
 
@@ -47,21 +52,10 @@ namespace XML_Reader_GUI
             public static Color color6 = Color.FromArgb(0, 153, 153);
         }
 
-        private struct labelHeader
-        {
-            private static string string0 = "Main Menu";
-            private static string string1 = "File Info";
-            private static string string2 = "Segment Data";
-            private static string string3 = "Posinit Points";
-            private static string string4 = "Symbolic Points";
-            private static string string5 = "Symbolic Points Groups";
-            private static string string6 = "Zones";
-        }
-
         #endregion
 
 
-        #region Activate/Desactivate Buttons Methods
+        #region Side Menu Buttons Methods
 
         /// <summary>
         /// Activate button highlighting and place buttonLeftBorderPanel
@@ -122,7 +116,7 @@ namespace XML_Reader_GUI
         #endregion
 
 
-        #region On-Click Metohds
+        #region Side Menu On-Click Metohds
 
         private void buttonFileInfo_Click(object sender, EventArgs e)
         {
@@ -215,11 +209,6 @@ namespace XML_Reader_GUI
 
         #region Top Right Corner Buttons
 
-        /*
-         * Standard:
-         * First function - change color to 
-        */
-
         // Close window button
         private void iconButtonExit_MouseEnter(object sender, System.EventArgs e)
         {
@@ -257,6 +246,86 @@ namespace XML_Reader_GUI
         }
 
         #endregion
+
+
+        #region Reading from XML file
+
+        /// <summary>
+        /// Initialize logic reading an XML File from path
+        /// and saving 
+        /// </summary>
+        /// <param name="path"> path of an XML file </param>
+        private void ReadXMLFile(string path)
+        {
+
+        }
+
+        private void buttonBrowseForFile_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";   // initial directory
+                openFileDialog.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";  // file type filters
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    textBoxPath.Text = openFileDialog.FileName;
+                }
+            }
+        }
+
+        private void buttonReadBrowsedFile_Click(object sender, EventArgs e)
+        {
+            if(textBoxPath.Text.EndsWith(".xml"))
+            {
+                ReadXMLFile(textBoxPath.Text);
+            }
+            else
+            {
+                // do nothing
+            }
+        }
+
+        private void buttonReadFileFromFolder_Click(object sender, EventArgs e)
+        {
+            // get path of the .exe file
+            string path = System.Reflection.Assembly.GetEntryAssembly().Location;
+            
+            // remove name of .exe file
+            int toRemove = path.Length - 18;
+            path = path.Remove(toRemove) + "_XML File";
+
+            var files = Directory.EnumerateFiles(path);
+
+            int count = 0;
+            bool fileExists = false;
+            foreach (string element in files)
+            {
+                if (element.EndsWith(".xml"))
+                {
+                    path = element;
+                    fileExists = true;
+                    break;
+                }
+                count++;             
+            }
+
+            if (fileExists) 
+            {
+                ReadXMLFile(path);
+            }
+            else
+            {
+                // do nothing
+            }
+
+        }
+
+        
+
+        #endregion
+
 
     }
 }

@@ -39,9 +39,15 @@
             this.buttonSegmentData = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.iconButtonMinimize = new FontAwesome.Sharp.IconButton();
-            this.labelTop = new System.Windows.Forms.Label();
             this.iconButtonExit = new FontAwesome.Sharp.IconButton();
+            this.labelTop = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.textBoxPath = new System.Windows.Forms.TextBox();
+            this.buttonBrowseForFile = new System.Windows.Forms.Button();
+            this.buttonReadBrowsedFile = new System.Windows.Forms.Button();
+            this.buttonReadFileFromFolder = new System.Windows.Forms.Button();
+            this.labelOR = new System.Windows.Forms.Label();
+            this.labelMainScreen = new System.Windows.Forms.Label();
             this.panelSideMenu.SuspendLayout();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -170,8 +176,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
             this.panelTop.Controls.Add(this.iconButtonMinimize);
-            this.panelTop.Controls.Add(this.labelTop);
             this.panelTop.Controls.Add(this.iconButtonExit);
+            this.panelTop.Controls.Add(this.labelTop);
             this.panelTop.Location = new System.Drawing.Point(272, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelTop.Name = "panelTop";
@@ -188,7 +194,7 @@
             this.iconButtonMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
             this.iconButtonMinimize.IconColor = System.Drawing.Color.White;
             this.iconButtonMinimize.IconSize = 16;
-            this.iconButtonMinimize.Location = new System.Drawing.Point(838, 0);
+            this.iconButtonMinimize.Location = new System.Drawing.Point(837, 0);
             this.iconButtonMinimize.Name = "iconButtonMinimize";
             this.iconButtonMinimize.Rotation = 0D;
             this.iconButtonMinimize.Size = new System.Drawing.Size(35, 35);
@@ -197,19 +203,6 @@
             this.iconButtonMinimize.Click += new System.EventHandler(this.iconButtonMinimize_Click);
             this.iconButtonMinimize.MouseEnter += new System.EventHandler(this.iconButtonMinimize_MouseEnter);
             this.iconButtonMinimize.MouseLeave += new System.EventHandler(this.iconButtonMinimize_MouseLeave);
-            // 
-            // labelTop
-            // 
-            this.labelTop.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.labelTop.Font = new System.Drawing.Font("Segoe UI", 15.25F);
-            this.labelTop.Location = new System.Drawing.Point(0, 0);
-            this.labelTop.Name = "labelTop";
-            this.labelTop.Size = new System.Drawing.Size(804, 35);
-            this.labelTop.TabIndex = 3;
-            this.labelTop.Text = "Main Screen";
-            this.labelTop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelTop_MouseMove);
             // 
             // iconButtonExit
             // 
@@ -220,7 +213,7 @@
             this.iconButtonExit.IconChar = FontAwesome.Sharp.IconChar.WindowClose;
             this.iconButtonExit.IconColor = System.Drawing.Color.White;
             this.iconButtonExit.IconSize = 16;
-            this.iconButtonExit.Location = new System.Drawing.Point(874, 0);
+            this.iconButtonExit.Location = new System.Drawing.Point(873, 0);
             this.iconButtonExit.Name = "iconButtonExit";
             this.iconButtonExit.Rotation = 0D;
             this.iconButtonExit.Size = new System.Drawing.Size(35, 35);
@@ -230,10 +223,99 @@
             this.iconButtonExit.MouseEnter += new System.EventHandler(this.iconButtonExit_MouseEnter);
             this.iconButtonExit.MouseLeave += new System.EventHandler(this.iconButtonExit_MouseLeave);
             // 
+            // labelTop
+            // 
+            this.labelTop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.labelTop.Font = new System.Drawing.Font("Segoe UI", 15.25F);
+            this.labelTop.Location = new System.Drawing.Point(-1, 0);
+            this.labelTop.Name = "labelTop";
+            this.labelTop.Size = new System.Drawing.Size(832, 35);
+            this.labelTop.TabIndex = 3;
+            this.labelTop.Text = "Main Screen";
+            this.labelTop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelTop_MouseMove);
+            // 
             // fileSystemWatcher1
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // textBoxPath
+            // 
+            this.textBoxPath.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.textBoxPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.textBoxPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxPath.ForeColor = System.Drawing.Color.White;
+            this.textBoxPath.Location = new System.Drawing.Point(357, 194);
+            this.textBoxPath.Name = "textBoxPath";
+            this.textBoxPath.Size = new System.Drawing.Size(577, 20);
+            this.textBoxPath.TabIndex = 2;
+            // 
+            // buttonBrowseForFile
+            // 
+            this.buttonBrowseForFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonBrowseForFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonBrowseForFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonBrowseForFile.FlatAppearance.BorderSize = 0;
+            this.buttonBrowseForFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBrowseForFile.Location = new System.Drawing.Point(955, 186);
+            this.buttonBrowseForFile.Name = "buttonBrowseForFile";
+            this.buttonBrowseForFile.Size = new System.Drawing.Size(169, 29);
+            this.buttonBrowseForFile.TabIndex = 3;
+            this.buttonBrowseForFile.Text = "Browse for XML file";
+            this.buttonBrowseForFile.UseVisualStyleBackColor = false;
+            this.buttonBrowseForFile.Click += new System.EventHandler(this.buttonBrowseForFile_Click);
+            // 
+            // buttonReadBrowsedFile
+            // 
+            this.buttonReadBrowsedFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonReadBrowsedFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonReadBrowsedFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonReadBrowsedFile.FlatAppearance.BorderSize = 0;
+            this.buttonReadBrowsedFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonReadBrowsedFile.Location = new System.Drawing.Point(765, 220);
+            this.buttonReadBrowsedFile.Name = "buttonReadBrowsedFile";
+            this.buttonReadBrowsedFile.Size = new System.Drawing.Size(169, 27);
+            this.buttonReadBrowsedFile.TabIndex = 4;
+            this.buttonReadBrowsedFile.Text = "Read XML File";
+            this.buttonReadBrowsedFile.UseVisualStyleBackColor = false;
+            this.buttonReadBrowsedFile.Click += new System.EventHandler(this.buttonReadBrowsedFile_Click);
+            // 
+            // buttonReadFileFromFolder
+            // 
+            this.buttonReadFileFromFolder.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonReadFileFromFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonReadFileFromFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonReadFileFromFolder.FlatAppearance.BorderSize = 0;
+            this.buttonReadFileFromFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonReadFileFromFolder.Location = new System.Drawing.Point(562, 339);
+            this.buttonReadFileFromFolder.Name = "buttonReadFileFromFolder";
+            this.buttonReadFileFromFolder.Size = new System.Drawing.Size(222, 58);
+            this.buttonReadFileFromFolder.TabIndex = 5;
+            this.buttonReadFileFromFolder.Text = "Read XML File From Folder";
+            this.buttonReadFileFromFolder.UseVisualStyleBackColor = false;
+            this.buttonReadFileFromFolder.Click += new System.EventHandler(this.buttonReadFileFromFolder_Click);
+            // 
+            // labelOR
+            // 
+            this.labelOR.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelOR.AutoSize = true;
+            this.labelOR.Location = new System.Drawing.Point(650, 282);
+            this.labelOR.Name = "labelOR";
+            this.labelOR.Size = new System.Drawing.Size(49, 20);
+            this.labelOR.TabIndex = 6;
+            this.labelOR.Text = "- OR -";
+            // 
+            // labelMainScreen
+            // 
+            this.labelMainScreen.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelMainScreen.Font = new System.Drawing.Font("Segoe UI", 15.25F);
+            this.labelMainScreen.Location = new System.Drawing.Point(516, 62);
+            this.labelMainScreen.Name = "labelMainScreen";
+            this.labelMainScreen.Size = new System.Drawing.Size(323, 30);
+            this.labelMainScreen.TabIndex = 7;
+            this.labelMainScreen.Text = "Read XML file from folder or path";
             // 
             // FormMainMenu
             // 
@@ -241,6 +323,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1183, 544);
+            this.Controls.Add(this.labelMainScreen);
+            this.Controls.Add(this.labelOR);
+            this.Controls.Add(this.buttonReadFileFromFolder);
+            this.Controls.Add(this.buttonReadBrowsedFile);
+            this.Controls.Add(this.buttonBrowseForFile);
+            this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelSideMenu);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F);
@@ -253,6 +341,7 @@
             this.panelTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -272,6 +361,12 @@
         private System.Windows.Forms.Label labelTop;
         private FontAwesome.Sharp.IconButton iconButtonMinimize;
         private FontAwesome.Sharp.IconButton iconButtonExit;
+        private System.Windows.Forms.Button buttonBrowseForFile;
+        private System.Windows.Forms.TextBox textBoxPath;
+        private System.Windows.Forms.Label labelOR;
+        private System.Windows.Forms.Button buttonReadFileFromFolder;
+        private System.Windows.Forms.Button buttonReadBrowsedFile;
+        private System.Windows.Forms.Label labelMainScreen;
     }
 }
 
