@@ -12,6 +12,8 @@ using System.Runtime.InteropServices;   // dragging form
 using System.IO;
 using System.Xml;
 
+//using XMLFileReaderLibrary;
+
 // TODO:
 // browse for filepath
 // childforms for each button
@@ -22,7 +24,6 @@ namespace XML_Reader_GUI
     public partial class FormMainMenu : Form
     {
         private Button currentButton;
-        //private OpenFileDialog openFile;
        
         public FormMainMenu()
         {
@@ -37,6 +38,8 @@ namespace XML_Reader_GUI
             // setting minimal size of the form
             this.MinimumSize = new Size(1055, 545);
 
+            //XMLReader x = new XMLReader("");
+            //Class1 c = new Class1();
         }
 
        
@@ -257,7 +260,7 @@ namespace XML_Reader_GUI
         /// <param name="path"> path of an XML file </param>
         private void ReadXMLFile(string path)
         {
-
+            //XMLReader xml = new XMLReader();
         }
 
         private void buttonBrowseForFile_Click(object sender, EventArgs e)
