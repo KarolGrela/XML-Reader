@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using XML_Reader_GUI.Secondary_Forms;
 
 namespace XML_Reader_GUI
 {
@@ -16,7 +18,7 @@ namespace XML_Reader_GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMainMenu());
+            Application.Run(new mainMenuForm());
         }
     }
 }

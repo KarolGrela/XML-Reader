@@ -11,6 +11,10 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;   // dragging form
 using System.IO;
 using System.Xml;
+using XMLReaderClassLibrary;
+using System.Security.Cryptography;
+using System.Diagnostics.Tracing;
+using XML_Reader_GUI.Secondary_Forms;
 
 //using XMLFileReaderLibrary;
 
@@ -21,14 +25,18 @@ using System.Xml;
 
 namespace XML_Reader_GUI
 {
-    public partial class FormMainMenu : Form
+    public partial class mainMenuForm : Form
     {
         private Button currentButton;
-       
-        public FormMainMenu()
+        private Form currentChildForm;
+
+        private XMLReader reader;
+
+        public mainMenuForm()
         {
             InitializeComponent();
 
+            // prevents icon flittering
             this.DoubleBuffered = true;
 
             // getting rid of the control box
@@ -38,11 +46,11 @@ namespace XML_Reader_GUI
             // setting minimal size of the form
             this.MinimumSize = new Size(1055, 545);
 
-            //XMLReader x = new XMLReader("");
-            //Class1 c = new Class1();
+            // prevents maximized window from hiding task bar
+            // this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
 
-       
+
         #region Structures
 
         private struct RGBColors
@@ -53,6 +61,7 @@ namespace XML_Reader_GUI
             public static Color color4 = Color.FromArgb(0, 255, 255);
             public static Color color5 = Color.FromArgb(0, 204, 204);
             public static Color color6 = Color.FromArgb(0, 153, 153);
+            public static Color color7 = Color.FromArgb(39, 37, 38);
         }
 
         #endregion
@@ -72,7 +81,7 @@ namespace XML_Reader_GUI
             if (senderButton != null) // if a button has been pressed
             {
                 currentButton = (Button)senderButton;   //saving sender button data to current button
-                
+
                 // changing attributes of clicked button
                 currentButton.BackColor = Color.FromArgb(64, 64, 64);
                 currentButton.ForeColor = panelColor;
@@ -83,7 +92,7 @@ namespace XML_Reader_GUI
                 buttonLeftBorderPanel.Visible = true;
 
                 // change text in header label
-                setHeadaer();
+                setHeader();
             }
         }
 
@@ -102,19 +111,49 @@ namespace XML_Reader_GUI
             }
         }
 
-        private void setHeadaer()
+
+        private void OpenChildForm(Form childForm)
         {
-            if(currentButton != null)
+            if (childForm != currentChildForm)
+            {
+                if (currentChildForm != null) currentChildForm.Close();
+
+                currentChildForm = childForm;
+                childForm.TopLevel = false;
+                childForm.FormBorderStyle = FormBorderStyle.None;   // delete edge of the form
+                childForm.Dock = DockStyle.Fill;                    // fill panel
+                panelDesktop.Controls.Add(childForm);
+                panelDesktop.Tag = childForm;
+                childForm.BringToFront();
+                childForm.BringToFront();
+                childForm.BringToFront();
+                childForm.Show();
+            }
+        }
+
+        /// <summary>
+        /// Setting text in panel to one corresponding with an active button
+        /// </summary>
+        private void setHeader()
+        {
+            if (currentButton != null)
             {
                 labelTop.Text = currentButton.Text;
             }
         }
 
+        /// <summary>
+        /// Setting text in panel to "Main Menu"
+        /// </summary>
         private void resetHeader()
         {
             labelTop.Text = "Main Screen";
         }
 
+        private void changeIndicatorPanelColor(Color color)
+        {
+            panelIndicator.BackColor = color;
+        }
 
         #endregion
 
@@ -124,37 +163,55 @@ namespace XML_Reader_GUI
         private void buttonFileInfo_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
+            changeIndicatorPanelColor(RGBColors.color1);
+            OpenChildForm(new FileInfoForm());
         }
 
         private void buttonSegmentData_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);
+            changeIndicatorPanelColor(RGBColors.color2);
+            OpenChildForm(new SegmentDataForm());
         }
 
         private void buttonPosinitPoints_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color3);
+            changeIndicatorPanelColor(RGBColors.color3);
+            OpenChildForm(new PosinitPointsForm());
         }
 
         private void buttonSymbolicPoints_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
+            changeIndicatorPanelColor(RGBColors.color4);
+            OpenChildForm(new SymbolicPointsForm());
         }
 
         private void buttonSymbolicPointsGroups_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color5);
+            changeIndicatorPanelColor(RGBColors.color5);
+            OpenChildForm(new SymbolicPointsGroupsForm());
         }
 
         private void buttonZones_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color6);
+            changeIndicatorPanelColor(RGBColors.color6);
+            OpenChildForm(new ZonesForm());
         }
 
         private void labelTopLeft_Click(object sender, EventArgs e)
         {
             DisableButton();
             resetHeader();
+            changeIndicatorPanelColor(RGBColors.color7);
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+                currentChildForm = null;
+            }
         }
 
         #endregion
@@ -215,8 +272,8 @@ namespace XML_Reader_GUI
         // Close window button
         private void iconButtonExit_MouseEnter(object sender, System.EventArgs e)
         {
-            iconButtonExit.IconColor = Color.FromArgb(229,204,255);
-            iconButtonExit.ForeColor = Color.FromArgb(229, 204, 255);
+            iconButtonExit.IconColor = Color.IndianRed;
+            iconButtonExit.ForeColor = Color.IndianRed;
         }
 
         private void iconButtonExit_MouseLeave(object sender, System.EventArgs e)
@@ -233,8 +290,8 @@ namespace XML_Reader_GUI
         // Minimize Window button
         private void iconButtonMinimize_MouseEnter(object sender, System.EventArgs e)
         {
-            iconButtonMinimize.IconColor = Color.FromArgb(229, 204, 255);
-            iconButtonMinimize.ForeColor = Color.FromArgb(229, 204, 255);
+            iconButtonMinimize.IconColor = Color.IndianRed;
+            iconButtonMinimize.ForeColor = Color.IndianRed;
         }
 
         private void iconButtonMinimize_MouseLeave(object sender, System.EventArgs e)
@@ -260,7 +317,16 @@ namespace XML_Reader_GUI
         /// <param name="path"> path of an XML file </param>
         private void ReadXMLFile(string path)
         {
-            //XMLReader xml = new XMLReader();
+            try
+            {
+                reader = new XMLReader(path);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private void buttonBrowseForFile_Click(object sender, EventArgs e)
@@ -280,7 +346,7 @@ namespace XML_Reader_GUI
 
         private void buttonReadBrowsedFile_Click(object sender, EventArgs e)
         {
-            if(textBoxPath.Text.EndsWith(".xml"))
+            if (textBoxPath.Text.EndsWith(".xml"))
             {
                 ReadXMLFile(textBoxPath.Text);
             }
@@ -294,7 +360,7 @@ namespace XML_Reader_GUI
         {
             // get path of the .exe file
             string path = System.Reflection.Assembly.GetEntryAssembly().Location;
-            
+
             // remove name of .exe file
             int toRemove = path.Length - 18;
             path = path.Remove(toRemove) + "_XML File";
@@ -311,10 +377,10 @@ namespace XML_Reader_GUI
                     fileExists = true;
                     break;
                 }
-                count++;             
+                count++;
             }
 
-            if (fileExists) 
+            if (fileExists)
             {
                 ReadXMLFile(path);
             }
@@ -325,10 +391,10 @@ namespace XML_Reader_GUI
 
         }
 
-        
+
+
 
         #endregion
-
 
     }
 }

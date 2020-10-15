@@ -49,16 +49,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="mainMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="mainMenuForm.Designer.cs">
+      <DependentUpon>mainMenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="popups\popupExceptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="popups\popupExceptionForm.Designer.cs">
+      <DependentUpon>popupExceptionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Secondary Forms\FileInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Secondary Forms\FileInfoForm.Designer.cs">
+      <DependentUpon>FileInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Secondary Forms\PosinitPointsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Secondary Forms\PosinitPointsForm.Designer.cs">
+      <DependentUpon>PosinitPointsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Secondary Forms\SegmentDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Secondary Forms\SegmentDataForm.Designer.cs">
+      <DependentUpon>SegmentDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Secondary Forms\SymbolicPointsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Secondary Forms\SymbolicPointsForm.Designer.cs">
+      <DependentUpon>SymbolicPointsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Secondary Forms\SymbolicPointsGroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Secondary Forms\SymbolicPointsGroupsForm.Designer.cs">
+      <DependentUpon>SymbolicPointsGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Secondary Forms\ZonesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Secondary Forms\ZonesForm.Designer.cs">
+      <DependentUpon>ZonesForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="mainMenuForm.resx">
+      <DependentUpon>mainMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popups\popupExceptionForm.resx">
+      <DependentUpon>popupExceptionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -69,6 +114,24 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Secondary Forms\FileInfoForm.resx">
+      <DependentUpon>FileInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Secondary Forms\PosinitPointsForm.resx">
+      <DependentUpon>PosinitPointsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Secondary Forms\SegmentDataForm.resx">
+      <DependentUpon>SegmentDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Secondary Forms\SymbolicPointsForm.resx">
+      <DependentUpon>SymbolicPointsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Secondary Forms\SymbolicPointsGroupsForm.resx">
+      <DependentUpon>SymbolicPointsGroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Secondary Forms\ZonesForm.resx">
+      <DependentUpon>ZonesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -82,6 +145,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XMLReaderClassLibrary\XMLReaderClassLibrary.csproj">
+      <Project>{504878b7-13ce-4728-b522-adbf61edeba0}</Project>
+      <Name>XMLReaderClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
