@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 using System.Runtime.InteropServices;   // dragging form
 
-namespace XML_Reader_GUI
+namespace XML_Reader_GUI.popups
 {
-    public partial class popupExceptionForm : Form
+    public partial class popupFormReadFromFile : Form
     {
-        public popupExceptionForm()
+        public popupFormReadFromFile(string message, string stack)
         {
             InitializeComponent();
 
@@ -23,6 +23,10 @@ namespace XML_Reader_GUI
             // getting rid of the control box
             this.ControlBox = false;
             this.Text = String.Empty;
+
+            // display exception message
+            this.labelMessage.Text = message;
+            this.labelStackTrace.Text = stack;
         }
 
 

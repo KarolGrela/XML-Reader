@@ -8,14 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using XMLReaderClassLibrary;
 
 namespace XML_Reader_GUI.Secondary_Forms
 {
     public partial class ZonesForm : Form
     {
-        public ZonesForm()
+        private XMLReader reader;
+        public ZonesForm(XMLReader xmlFile)
         {
             InitializeComponent();
+            reader = xmlFile;
         }
     }
 }

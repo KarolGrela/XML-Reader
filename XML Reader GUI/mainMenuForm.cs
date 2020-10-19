@@ -15,6 +15,7 @@ using XMLReaderClassLibrary;
 using System.Security.Cryptography;
 using System.Diagnostics.Tracing;
 using XML_Reader_GUI.Secondary_Forms;
+using XML_Reader_GUI.popups;
 
 //using XMLFileReaderLibrary;
 
@@ -44,7 +45,7 @@ namespace XML_Reader_GUI
             this.Text = String.Empty;
 
             // setting minimal size of the form
-            this.MinimumSize = new Size(1055, 545);
+            this.MinimumSize = new Size(1055, 615);
 
             // prevents maximized window from hiding task bar
             // this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
@@ -62,6 +63,7 @@ namespace XML_Reader_GUI
             public static Color color5 = Color.FromArgb(0, 204, 204);
             public static Color color6 = Color.FromArgb(0, 153, 153);
             public static Color color7 = Color.FromArgb(39, 37, 38);
+            public static Color color8 = Color.FromArgb(184, 40, 91);
         }
 
         #endregion
@@ -90,7 +92,7 @@ namespace XML_Reader_GUI
                 buttonLeftBorderPanel.BackColor = panelColor;
                 buttonLeftBorderPanel.Location = new Point(0, currentButton.Location.Y);
                 buttonLeftBorderPanel.Visible = true;
-
+                buttonLeftBorderPanel.BringToFront();
                 // change text in header label
                 setHeader();
             }
@@ -111,21 +113,22 @@ namespace XML_Reader_GUI
             }
         }
 
-
+        /// <summary>
+        /// Open new form inside of the main form
+        /// </summary>
+        /// <param name="childForm"> Template of new form </param>
         private void OpenChildForm(Form childForm)
         {
             if (childForm != currentChildForm)
             {
                 if (currentChildForm != null) currentChildForm.Close();
 
-                currentChildForm = childForm;
-                childForm.TopLevel = false;
+                currentChildForm = childForm;                       // saving a reference to the child form inside of the main form
+                childForm.TopLevel = false;                          // enables child form to be docked to panel "panelDesktop"
                 childForm.FormBorderStyle = FormBorderStyle.None;   // delete edge of the form
                 childForm.Dock = DockStyle.Fill;                    // fill panel
-                panelDesktop.Controls.Add(childForm);
-                panelDesktop.Tag = childForm;
-                childForm.BringToFront();
-                childForm.BringToFront();
+                panelDesktop.Controls.Add(childForm);               // dock child form to "panelDesktop"
+                panelDesktop.Tag = childForm;                       
                 childForm.BringToFront();
                 childForm.Show();
             }
@@ -164,42 +167,49 @@ namespace XML_Reader_GUI
         {
             ActivateButton(sender, RGBColors.color1);
             changeIndicatorPanelColor(RGBColors.color1);
-            OpenChildForm(new FileInfoForm());
+            OpenChildForm(new FileInfoForm(reader));
         }
 
         private void buttonSegmentData_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);
             changeIndicatorPanelColor(RGBColors.color2);
-            OpenChildForm(new SegmentDataForm());
+            OpenChildForm(new SegmentDataForm(reader));
         }
 
         private void buttonPosinitPoints_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color3);
             changeIndicatorPanelColor(RGBColors.color3);
-            OpenChildForm(new PosinitPointsForm());
+            OpenChildForm(new PosinitPointsForm(reader));
         }
 
         private void buttonSymbolicPoints_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
             changeIndicatorPanelColor(RGBColors.color4);
-            OpenChildForm(new SymbolicPointsForm());
+            OpenChildForm(new SymbolicPointsForm(reader));
         }
 
         private void buttonSymbolicPointsGroups_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color5);
             changeIndicatorPanelColor(RGBColors.color5);
-            OpenChildForm(new SymbolicPointsGroupsForm());
+            OpenChildForm(new SymbolicPointsGroupsForm(reader));
         }
 
         private void buttonZones_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color6);
             changeIndicatorPanelColor(RGBColors.color6);
-            OpenChildForm(new ZonesForm());
+            OpenChildForm(new ZonesForm(reader));
+        }
+
+        private void buttonSendData_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color8);
+            changeIndicatorPanelColor(RGBColors.color8);
+            OpenChildForm(new ZonesForm(reader));
         }
 
         private void labelTopLeft_Click(object sender, EventArgs e)
@@ -320,12 +330,10 @@ namespace XML_Reader_GUI
             try
             {
                 reader = new XMLReader(path);
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                CallPopup(ex.Message, ex.StackTrace);
             }
         }
 
@@ -350,9 +358,13 @@ namespace XML_Reader_GUI
             {
                 ReadXMLFile(textBoxPath.Text);
             }
+            else if (textBoxPath.Text == "")
+            {
+                CallPopup("No file has been chosen!", "Choose a file!");
+            }
             else
             {
-                // do nothing
+                CallPopup("Chosen file is of wrong type!", "Choose a file of a proper type");
             }
         }
 
@@ -395,6 +407,18 @@ namespace XML_Reader_GUI
 
 
         #endregion
+
+
+        #region Exceptions and errors
+
+        private void CallPopup(string header, string text)
+        {
+            var popup = new popupFormReadFromFile(header, text);
+            popup.Show();
+        }
+
+        #endregion
+
 
     }
 }

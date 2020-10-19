@@ -8,14 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using XMLReaderClassLibrary;
+
 
 namespace XML_Reader_GUI.Secondary_Forms
 {
     public partial class PosinitPointsForm : Form
     {
-        public PosinitPointsForm()
+        private XMLReader reader;
+        public PosinitPointsForm(XMLReader xmlFile)
         {
             InitializeComponent();
+            reader = xmlFile;
         }
     }
 }

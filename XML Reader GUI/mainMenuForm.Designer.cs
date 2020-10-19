@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainMenuForm));
             this.panelSideMenu = new System.Windows.Forms.Panel();
             this.buttonLeftBorderPanel = new System.Windows.Forms.Panel();
             this.labelTopLeft = new System.Windows.Forms.Label();
@@ -50,6 +51,7 @@
             this.buttonReadBrowsedFile = new System.Windows.Forms.Button();
             this.labelOR = new System.Windows.Forms.Label();
             this.buttonReadFileFromFolder = new System.Windows.Forms.Button();
+            this.buttonSendData = new System.Windows.Forms.Button();
             this.panelSideMenu.SuspendLayout();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -61,6 +63,7 @@
             this.panelSideMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panelSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.panelSideMenu.Controls.Add(this.buttonSendData);
             this.panelSideMenu.Controls.Add(this.buttonLeftBorderPanel);
             this.panelSideMenu.Controls.Add(this.labelTopLeft);
             this.panelSideMenu.Controls.Add(this.buttonZones);
@@ -72,7 +75,7 @@
             this.panelSideMenu.Location = new System.Drawing.Point(0, 0);
             this.panelSideMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelSideMenu.Name = "panelSideMenu";
-            this.panelSideMenu.Size = new System.Drawing.Size(271, 544);
+            this.panelSideMenu.Size = new System.Drawing.Size(271, 591);
             this.panelSideMenu.TabIndex = 0;
             this.panelSideMenu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelSideMenu_MouseMove);
             // 
@@ -269,7 +272,7 @@
             this.panelDesktop.ForeColor = System.Drawing.Color.White;
             this.panelDesktop.Location = new System.Drawing.Point(272, 41);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(911, 504);
+            this.panelDesktop.Size = new System.Drawing.Size(911, 551);
             this.panelDesktop.TabIndex = 9;
             // 
             // labelMainScreen
@@ -349,18 +352,32 @@
             this.buttonReadFileFromFolder.UseVisualStyleBackColor = false;
             this.buttonReadFileFromFolder.Click += new System.EventHandler(this.buttonReadFileFromFolder_Click);
             // 
+            // buttonSendData
+            // 
+            this.buttonSendData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonSendData.FlatAppearance.BorderSize = 0;
+            this.buttonSendData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSendData.Location = new System.Drawing.Point(0, 515);
+            this.buttonSendData.Name = "buttonSendData";
+            this.buttonSendData.Size = new System.Drawing.Size(271, 70);
+            this.buttonSendData.TabIndex = 10;
+            this.buttonSendData.Text = "Send Data to PLC";
+            this.buttonSendData.UseVisualStyleBackColor = false;
+            this.buttonSendData.Click += new System.EventHandler(this.buttonSendData_Click);
+            // 
             // mainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(1183, 544);
+            this.ClientSize = new System.Drawing.Size(1183, 591);
             this.Controls.Add(this.panelDesktop);
             this.Controls.Add(this.panelIndicator);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelSideMenu);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "mainMenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -398,6 +415,7 @@
         private System.Windows.Forms.Button buttonReadBrowsedFile;
         private System.Windows.Forms.Label labelOR;
         private System.Windows.Forms.Button buttonReadFileFromFolder;
+        private System.Windows.Forms.Button buttonSendData;
     }
 }
 

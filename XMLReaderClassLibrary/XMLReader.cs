@@ -95,8 +95,11 @@ namespace XMLReaderClassLibrary
             }
             catch (Exception ex)
             {
+                xmlFile.Close();
                 ArgumentException a_ex = new ArgumentException("XML File has wrong structure or is empty", ex);
                 throw a_ex;
+
+                //throw ex;
             }
 
             // Reading XML file
