@@ -30,7 +30,7 @@ namespace XML_Reader_GUI.Secondary_Forms
             this.AutoScroll = true;
             
             reader = xmlFile;       // save data from XML file to local variable
-            activeColor = Color.FromArgb(152, 255, 255);    // color of button while active
+            activeColor = Color.FromArgb(0, 255, 255);    // color of button while active
             passiveColor = Color.DimGray;                   // color of button while desactivated/unused
             panelSymbolicPointsHeader.Height = 35;                // hiding the panel
 

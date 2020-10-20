@@ -17,12 +17,6 @@ using System.Diagnostics.Tracing;
 using XML_Reader_GUI.Secondary_Forms;
 using XML_Reader_GUI.popups;
 
-//using XMLFileReaderLibrary;
-
-// TODO:
-// browse for filepath
-// childforms for each button
-// decision
 
 namespace XML_Reader_GUI
 {
@@ -209,7 +203,7 @@ namespace XML_Reader_GUI
         {
             ActivateButton(sender, RGBColors.color8);
             changeIndicatorPanelColor(RGBColors.color8);
-            OpenChildForm(new ZonesForm(reader));
+            OpenChildForm(new SendDataForm(reader));
         }
 
         private void labelTopLeft_Click(object sender, EventArgs e)
