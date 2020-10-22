@@ -1,4 +1,5 @@
 ﻿using S7.Net;
+using System.IO;
 
 namespace XML_Reader_GUI.Secondary_Forms
 {
@@ -46,27 +47,36 @@ namespace XML_Reader_GUI.Secondary_Forms
             this.textBoxRack = new System.Windows.Forms.TextBox();
             this.textBoxSlot = new System.Windows.Forms.TextBox();
             this.buttonConnectWithPlc = new System.Windows.Forms.Button();
+            this.labelSentData = new System.Windows.Forms.Label();
+            this.labelX = new System.Windows.Forms.Label();
+            this.labelY = new System.Windows.Forms.Label();
+            this.labelCharSent = new System.Windows.Forms.Label();
+            this.textBoxX = new System.Windows.Forms.TextBox();
+            this.textBoxY = new System.Windows.Forms.TextBox();
+            this.textBoxCharSent = new System.Windows.Forms.TextBox();
+            this.labelRcvData = new System.Windows.Forms.Label();
+            this.labelZ = new System.Windows.Forms.Label();
+            this.labelZFill = new System.Windows.Forms.Label();
+            this.labelCharRcvd = new System.Windows.Forms.Label();
+            this.labelCharRcvdFill = new System.Windows.Forms.Label();
+            this.labelLifebitFill = new System.Windows.Forms.Label();
+            this.labelLifebit = new System.Windows.Forms.Label();
+            this.buttonSendData = new System.Windows.Forms.Button();
             this.panelIpNumber.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxPlcType
             // 
             this.comboBoxPlcType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.comboBoxPlcType.DataSource = new S7.Net.CpuType[] {
-        S7.Net.CpuType.S7200,
-        S7.Net.CpuType.S7300,
-        S7.Net.CpuType.S7400,
-        S7.Net.CpuType.S71200,
-        S7.Net.CpuType.S71500};
             this.comboBoxPlcType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxPlcType.ForeColor = System.Drawing.Color.White;
             this.comboBoxPlcType.FormattingEnabled = true;
-            /*this.comboBoxPlcType.Items.AddRange(new object[] {
+            this.comboBoxPlcType.Items.AddRange(new object[] {
             S7.Net.CpuType.S7200,
             S7.Net.CpuType.S7300,
             S7.Net.CpuType.S7400,
             S7.Net.CpuType.S71200,
-            S7.Net.CpuType.S71500});*/
+            S7.Net.CpuType.S71500});
             this.comboBoxPlcType.Location = new System.Drawing.Point(108, 39);
             this.comboBoxPlcType.Name = "comboBoxPlcType";
             this.comboBoxPlcType.Size = new System.Drawing.Size(238, 28);
@@ -145,7 +155,7 @@ namespace XML_Reader_GUI.Secondary_Forms
             this.textBoxIpFourth.Location = new System.Drawing.Point(156, 0);
             this.textBoxIpFourth.Name = "textBoxIpFourth";
             this.textBoxIpFourth.Size = new System.Drawing.Size(40, 20);
-            this.textBoxIpFourth.TabIndex = 13;
+            this.textBoxIpFourth.TabIndex = 22;
             this.textBoxIpFourth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxIpFourth.LostFocus += new System.EventHandler(this.textBoxIpFourth_LostFocus);
             // 
@@ -189,7 +199,7 @@ namespace XML_Reader_GUI.Secondary_Forms
             this.textBoxIpSecond.Location = new System.Drawing.Point(52, 0);
             this.textBoxIpSecond.Name = "textBoxIpSecond";
             this.textBoxIpSecond.Size = new System.Drawing.Size(40, 20);
-            this.textBoxIpSecond.TabIndex = 18;
+            this.textBoxIpSecond.TabIndex = 13;
             this.textBoxIpSecond.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxIpSecond.LostFocus += new System.EventHandler(this.textBoxIpSecond_LostFocus);
             // 
@@ -231,7 +241,7 @@ namespace XML_Reader_GUI.Secondary_Forms
             this.buttonConnectWithPlc.FlatAppearance.BorderSize = 0;
             this.buttonConnectWithPlc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonConnectWithPlc.ForeColor = System.Drawing.Color.White;
-            this.buttonConnectWithPlc.Location = new System.Drawing.Point(147, 108);
+            this.buttonConnectWithPlc.Location = new System.Drawing.Point(38, 179);
             this.buttonConnectWithPlc.Name = "buttonConnectWithPlc";
             this.buttonConnectWithPlc.Size = new System.Drawing.Size(155, 59);
             this.buttonConnectWithPlc.TabIndex = 21;
@@ -239,12 +249,174 @@ namespace XML_Reader_GUI.Secondary_Forms
             this.buttonConnectWithPlc.UseVisualStyleBackColor = false;
             this.buttonConnectWithPlc.Click += new System.EventHandler(this.buttonConnectWithPlc_Click);
             // 
+            // labelSentData
+            // 
+            this.labelSentData.AutoSize = true;
+            this.labelSentData.Location = new System.Drawing.Point(441, 42);
+            this.labelSentData.Name = "labelSentData";
+            this.labelSentData.Size = new System.Drawing.Size(77, 20);
+            this.labelSentData.TabIndex = 22;
+            this.labelSentData.Text = "Sent Data:";
+            // 
+            // labelX
+            // 
+            this.labelX.AutoSize = true;
+            this.labelX.Location = new System.Drawing.Point(441, 76);
+            this.labelX.Name = "labelX";
+            this.labelX.Size = new System.Drawing.Size(34, 20);
+            this.labelX.TabIndex = 23;
+            this.labelX.Text = "x = ";
+            // 
+            // labelY
+            // 
+            this.labelY.AutoSize = true;
+            this.labelY.Location = new System.Drawing.Point(441, 108);
+            this.labelY.Name = "labelY";
+            this.labelY.Size = new System.Drawing.Size(34, 20);
+            this.labelY.TabIndex = 24;
+            this.labelY.Text = "y = ";
+            // 
+            // labelCharSent
+            // 
+            this.labelCharSent.AutoSize = true;
+            this.labelCharSent.Location = new System.Drawing.Point(441, 143);
+            this.labelCharSent.Name = "labelCharSent";
+            this.labelCharSent.Size = new System.Drawing.Size(55, 20);
+            this.labelCharSent.TabIndex = 25;
+            this.labelCharSent.Text = "char = ";
+            // 
+            // textBoxX
+            // 
+            this.textBoxX.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.textBoxX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxX.ForeColor = System.Drawing.Color.White;
+            this.textBoxX.Location = new System.Drawing.Point(481, 76);
+            this.textBoxX.Name = "textBoxX";
+            this.textBoxX.Size = new System.Drawing.Size(32, 20);
+            this.textBoxX.TabIndex = 26;
+            this.textBoxX.LostFocus += new System.EventHandler(this.textBoxX_LostFocus);
+            // 
+            // textBoxY
+            // 
+            this.textBoxY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.textBoxY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxY.ForeColor = System.Drawing.Color.White;
+            this.textBoxY.Location = new System.Drawing.Point(481, 108);
+            this.textBoxY.Name = "textBoxY";
+            this.textBoxY.Size = new System.Drawing.Size(32, 20);
+            this.textBoxY.TabIndex = 27;
+            this.textBoxY.LostFocus += new System.EventHandler(this.textBoxY_LostFocus);
+            // 
+            // textBoxCharSent
+            // 
+            this.textBoxCharSent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.textBoxCharSent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxCharSent.ForeColor = System.Drawing.Color.White;
+            this.textBoxCharSent.Location = new System.Drawing.Point(502, 143);
+            this.textBoxCharSent.Name = "textBoxCharSent";
+            this.textBoxCharSent.Size = new System.Drawing.Size(32, 20);
+            this.textBoxCharSent.TabIndex = 28;
+            this.textBoxCharSent.LostFocus += new System.EventHandler(this.textBoxCharSent_LostFocus);
+            // 
+            // labelRcvData
+            // 
+            this.labelRcvData.AutoSize = true;
+            this.labelRcvData.Location = new System.Drawing.Point(623, 42);
+            this.labelRcvData.Name = "labelRcvData";
+            this.labelRcvData.Size = new System.Drawing.Size(108, 20);
+            this.labelRcvData.TabIndex = 29;
+            this.labelRcvData.Text = "Received Data:";
+            // 
+            // labelZ
+            // 
+            this.labelZ.AutoSize = true;
+            this.labelZ.Location = new System.Drawing.Point(623, 108);
+            this.labelZ.Name = "labelZ";
+            this.labelZ.Size = new System.Drawing.Size(84, 20);
+            this.labelZ.TabIndex = 30;
+            this.labelZ.Text = "z = x + y = ";
+            // 
+            // labelZFill
+            // 
+            this.labelZFill.AutoSize = true;
+            this.labelZFill.Location = new System.Drawing.Point(703, 108);
+            this.labelZFill.Name = "labelZFill";
+            this.labelZFill.Size = new System.Drawing.Size(62, 20);
+            this.labelZFill.TabIndex = 31;
+            this.labelZFill.Text = "no_data";
+            // 
+            // labelCharRcvd
+            // 
+            this.labelCharRcvd.AutoSize = true;
+            this.labelCharRcvd.Location = new System.Drawing.Point(623, 143);
+            this.labelCharRcvd.Name = "labelCharRcvd";
+            this.labelCharRcvd.Size = new System.Drawing.Size(55, 20);
+            this.labelCharRcvd.TabIndex = 32;
+            this.labelCharRcvd.Text = "char = ";
+            // 
+            // labelCharRcvdFill
+            // 
+            this.labelCharRcvdFill.AutoSize = true;
+            this.labelCharRcvdFill.Location = new System.Drawing.Point(675, 143);
+            this.labelCharRcvdFill.Name = "labelCharRcvdFill";
+            this.labelCharRcvdFill.Size = new System.Drawing.Size(62, 20);
+            this.labelCharRcvdFill.TabIndex = 33;
+            this.labelCharRcvdFill.Text = "no_data";
+            // 
+            // labelLifebitFill
+            // 
+            this.labelLifebitFill.AutoSize = true;
+            this.labelLifebitFill.Location = new System.Drawing.Point(683, 76);
+            this.labelLifebitFill.Name = "labelLifebitFill";
+            this.labelLifebitFill.Size = new System.Drawing.Size(62, 20);
+            this.labelLifebitFill.TabIndex = 35;
+            this.labelLifebitFill.Text = "no_data";
+            // 
+            // labelLifebit
+            // 
+            this.labelLifebit.AutoSize = true;
+            this.labelLifebit.Location = new System.Drawing.Point(623, 76);
+            this.labelLifebit.Name = "labelLifebit";
+            this.labelLifebit.Size = new System.Drawing.Size(54, 20);
+            this.labelLifebit.TabIndex = 34;
+            this.labelLifebit.Text = "Lifebit:";
+            // 
+            // buttonSendData
+            // 
+            this.buttonSendData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonSendData.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.buttonSendData.FlatAppearance.BorderSize = 0;
+            this.buttonSendData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSendData.ForeColor = System.Drawing.Color.White;
+            this.buttonSendData.Location = new System.Drawing.Point(445, 179);
+            this.buttonSendData.Name = "buttonSendData";
+            this.buttonSendData.Size = new System.Drawing.Size(89, 41);
+            this.buttonSendData.TabIndex = 36;
+            this.buttonSendData.Text = "Send Data";
+            this.buttonSendData.UseVisualStyleBackColor = false;
+            this.buttonSendData.Click += new System.EventHandler(this.buttonSendData_Click);
+            // 
             // SendDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(850, 410);
+            this.ClientSize = new System.Drawing.Size(850, 400);
+            this.Controls.Add(this.buttonSendData);
+            this.Controls.Add(this.labelLifebitFill);
+            this.Controls.Add(this.labelLifebit);
+            this.Controls.Add(this.labelCharRcvdFill);
+            this.Controls.Add(this.labelCharRcvd);
+            this.Controls.Add(this.labelZFill);
+            this.Controls.Add(this.labelZ);
+            this.Controls.Add(this.labelRcvData);
+            this.Controls.Add(this.textBoxCharSent);
+            this.Controls.Add(this.textBoxY);
+            this.Controls.Add(this.textBoxX);
+            this.Controls.Add(this.labelCharSent);
+            this.Controls.Add(this.labelY);
+            this.Controls.Add(this.labelX);
+            this.Controls.Add(this.labelSentData);
             this.Controls.Add(this.buttonConnectWithPlc);
             this.Controls.Add(this.textBoxSlot);
             this.Controls.Add(this.textBoxRack);
@@ -285,5 +457,20 @@ namespace XML_Reader_GUI.Secondary_Forms
         private System.Windows.Forms.TextBox textBoxRack;
         private System.Windows.Forms.TextBox textBoxSlot;
         private System.Windows.Forms.Button buttonConnectWithPlc;
+        private System.Windows.Forms.Label labelSentData;
+        private System.Windows.Forms.Label labelX;
+        private System.Windows.Forms.Label labelY;
+        private System.Windows.Forms.Label labelCharSent;
+        private System.Windows.Forms.TextBox textBoxX;
+        private System.Windows.Forms.TextBox textBoxY;
+        private System.Windows.Forms.TextBox textBoxCharSent;
+        private System.Windows.Forms.Label labelRcvData;
+        private System.Windows.Forms.Label labelZ;
+        private System.Windows.Forms.Label labelZFill;
+        private System.Windows.Forms.Label labelCharRcvd;
+        private System.Windows.Forms.Label labelCharRcvdFill;
+        private System.Windows.Forms.Label labelLifebitFill;
+        private System.Windows.Forms.Label labelLifebit;
+        private System.Windows.Forms.Button buttonSendData;
     }
 }

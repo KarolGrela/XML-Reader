@@ -28,12 +28,19 @@ namespace XML_Reader_GUI.Secondary_Forms
 
         private XMLReader reader;
 
+
         public SendDataForm(XMLReader xmlFile)
         {
             InitializeComponent();
             reader = xmlFile;
 
-            
+            comboBoxPlcType.SelectedItem = S7.Net.CpuType.S71500;   // Select PLC S71200
+            textBoxIpFirst.Text = "192";
+            textBoxIpSecond.Text = "168";
+            textBoxIpThird.Text = "0";
+            textBoxIpFourth.Text = "2";
+            textBoxRack.Text = "0";
+            textBoxSlot.Text = "1";
         }
 
 
@@ -123,11 +130,38 @@ namespace XML_Reader_GUI.Secondary_Forms
         }
 
 
+        private void textBoxX_LostFocus(object sender, EventArgs e)
+        {
+            int number;
+            bool result = Int32.TryParse(textBoxX.Text, out number);
+            if (result == false)    // if "Text" is not a number
+            {
+                textBoxX.Text = "";
+            }
+        }
+
+        private void textBoxY_LostFocus(object sender, EventArgs e)
+        {
+            int number;
+            bool result = Int32.TryParse(textBoxY.Text, out number);
+            if (result == false)    // if "Text" is not a number
+            {
+                textBoxY.Text = "";
+            }
+        }
+
+        private void textBoxCharSent_LostFocus(object sender, EventArgs e)
+        {
+            if(textBoxCharSent.Text.Length>1)
+            {
+                textBoxCharSent.Text = textBoxCharSent.Text.Remove(1, textBoxCharSent.Text.Length-1);
+            }
+        }
+
         #endregion
 
 
-
-        #region Buttons
+        #region Connect with PLC
 
         private void buttonConnectWithPlc_Click(object sender, EventArgs e)
         {
@@ -135,8 +169,18 @@ namespace XML_Reader_GUI.Secondary_Forms
             // if all are true then connection can be established
             bool bIP = true, bRack = true, bSlot = true;
 
+            CpuType type;
             // reading chosen type of PLC
-            CpuType type = (CpuType)comboBoxPlcType.SelectedItem;   
+            if (comboBoxPlcType.SelectedItem != null)   // if type of PLC has been selected
+            {
+                type = (CpuType)comboBoxPlcType.SelectedItem;   // save chosen type to variable
+            }
+            else
+            {
+                // if type of PLC has been selected
+                comboBoxPlcType.SelectedItem = S7.Net.CpuType.S71200;   // Select PLC S71200
+                type = (CpuType)comboBoxPlcType.SelectedItem;           // save chosen type to variable
+            }                      
 
             string ipNumber = "";    // stores combined IP number
             // checking if IP number has been typed wrongly
@@ -188,7 +232,7 @@ namespace XML_Reader_GUI.Secondary_Forms
 
                 // CLOSE CONNECTION
                 // OBSOLETE IN THIS PART OF CODE
-                plc.Close();
+                //plc.Close();
             }
             else    // if a piece of data has been typed wrong
             {
@@ -208,5 +252,77 @@ namespace XML_Reader_GUI.Secondary_Forms
         }
 
         #endregion
+
+
+        #region Sending data to PLC
+
+        private void buttonSendData_Click(object sender, EventArgs e)
+        {
+            if (plc.IsConnected)
+            { 
+                byte[] sendData = PrepareDataToSend();
+                ErrorCode _error = plc.WriteBytes(DataType.DataBlock, 30, 0, sendData);     // send data
+            }
+        }
+
+        private byte[] PrepareDataToSend()
+        {
+            byte[] sendData = new byte[8];
+
+            /// preparing boolean value
+            if (labelLifebitFill.Text == "false" || labelLifebitFill.Text == "no_data")
+            {
+                sendData[0] = 1;    // first cycle
+            }
+            else if (labelLifebitFill.Text == "true")
+            {
+                sendData[0] = 0;
+            }
+
+            /// preparing integer variables
+            // preparing x variable
+            short x;
+            bool b_x = Int16.TryParse(textBoxX.Text, out x);
+            if(b_x == false)
+            {
+                x = 0;
+            }
+            // converting integer to byte[] array and reversing order (S7 uses different notation)
+            byte[] xB = BitConverter.GetBytes(x);
+            Array.Reverse(xB);
+            sendData[2] = xB[0];
+            sendData[3] = xB[1];
+
+            // preparing y variable
+            short y;
+            bool b_y = Int16.TryParse(textBoxY.Text, out y);
+            if (b_y == false)
+            {
+                y = 0;
+            }
+            // converting integer to byte[] array and reversing order (S7 uses different notation)
+            byte[] yB = BitConverter.GetBytes(y);
+            Array.Reverse(yB);
+            sendData[4] = yB[0];
+            sendData[5] = yB[1];
+
+            /// preparing char variable
+            char _char;
+            if (textBoxCharSent.Text.Length != 0)
+            {
+                _char = textBoxCharSent.Text[0];
+            }
+            else
+            {
+                _char = ' ';
+            }
+            sendData[6] = (byte)_char;
+            sendData[7] = (byte)' ';
+
+            return sendData;
+        }
+
+        #endregion
+
     }
 }
