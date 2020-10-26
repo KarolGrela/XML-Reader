@@ -18,7 +18,6 @@ namespace XML_Reader_GUI.Secondary_Forms
     public partial class SymbolicPointsForm : Form
     {
         private XMLReader reader;
-        //private Plc plc;
 
         /// <summary>
         /// variables created to control buttons
@@ -68,20 +67,18 @@ namespace XML_Reader_GUI.Secondary_Forms
 
         #region Buttons on-click methods
 
-        /// <summary>
-        /// Segment data on click method
-        /// </summary>
-        /// <param name="sender"> clicked button </param>
-        /// <param name="e"></param>
+
         private void iconButtonSymbolicPoints_Click(object sender, EventArgs e)
         {
-            if ((IconButton)sender == currentButton)
+            if ((IconButton)sender == currentButton)        
             {
+                // roll data grid
                 panelSymbolicPointsHeader.Height = 35;
                 DesactivateButton();
             }
             else
             {
+                // expand data grid
                 panelSymbolicPointsHeader.Height = 370;
                 ActivateButton(sender);
             }
@@ -92,7 +89,7 @@ namespace XML_Reader_GUI.Secondary_Forms
         {
             if (reader != null && Global.MainPlc != null)
             {
-                if (reader.symbolicPoints.symbolic_points_list.Count() == 0)
+                if (reader.symbolicPoints.symbolic_points_list.Count() == 0) 
                 {
                     var form = new popupPlcConnection("XML File has no symbolic points", "", false);
                     form.Show();

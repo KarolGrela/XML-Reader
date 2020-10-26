@@ -7,8 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using System.Runtime.InteropServices;   // dragging form
+using System.Runtime.InteropServices;   // enables dragging form
 
 
 namespace XML_Reader_GUI.popups
@@ -29,6 +28,7 @@ namespace XML_Reader_GUI.popups
             this.labelMessage.Text = message;
             this.labelStackTrace.Text = stack;
 
+            // change icon and icon color, depending on logical value of a "success" variable
             if (success)
             {
                 this.iconPictureBoxWarning.IconChar = FontAwesome.Sharp.IconChar.CheckCircle;
@@ -44,6 +44,11 @@ namespace XML_Reader_GUI.popups
 
         #region Mouse Drag
 
+        /// <summary>
+        /// thid region is necessary, beacause after removing the control box the main form is immovable
+        /// </summary>
+
+        // necessary variables and dlls
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -52,6 +57,7 @@ namespace XML_Reader_GUI.popups
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
+        // methods enabling dragging form while clicking on:
         private void panelTop_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -91,7 +97,7 @@ namespace XML_Reader_GUI.popups
 
         private void iconButtonExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Close();       // close this form, not whole process
         }
 
         #endregion

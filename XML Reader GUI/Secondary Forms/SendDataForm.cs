@@ -26,7 +26,7 @@ namespace XML_Reader_GUI.Secondary_Forms
         /// <param name="slot"> number of slot, of type Int16 </param>
 
         private XMLReader reader;
-        //private Plc plc;
+        
         private string global_lifebit = "no_data";
         private string global_z = "no_data";
         private string global_char = "no_data";
@@ -36,9 +36,9 @@ namespace XML_Reader_GUI.Secondary_Forms
         {
             InitializeComponent();
             reader = xmlFile;
-            //this.plc = mainPlc;
 
-            comboBoxPlcType.SelectedItem = S7.Net.CpuType.S71500;   // Select PLC S71200
+            // data written to textboxes on form initialization
+            comboBoxPlcType.SelectedItem = CpuType.S71500;
             textBoxIpFirst.Text = "192";
             textBoxIpSecond.Text = "168";
             textBoxIpThird.Text = "0";
@@ -156,8 +156,9 @@ namespace XML_Reader_GUI.Secondary_Forms
 
         private void textBoxCharSent_LostFocus(object sender, EventArgs e)
         {
-            if (textBoxCharSent.Text.Length > 1)
+            if (textBoxCharSent.Text.Length > 1)    // if "Text" consists of more than one character
             {
+                // remove all characters but first one
                 textBoxCharSent.Text = textBoxCharSent.Text.Remove(1, textBoxCharSent.Text.Length - 1);
             }
         }
@@ -173,8 +174,8 @@ namespace XML_Reader_GUI.Secondary_Forms
             // if all are true then connection can be established
             bool bIP = true, bRack = true, bSlot = true;
 
+            /// choose PLC S71200 if nothing has been chosen
             CpuType type;
-            // reading chosen type of PLC
             if (comboBoxPlcType.SelectedItem != null)   // if type of PLC has been selected
             {
                 type = (CpuType)comboBoxPlcType.SelectedItem;   // save chosen type to variable
@@ -187,7 +188,7 @@ namespace XML_Reader_GUI.Secondary_Forms
             }
 
             string ipNumber = "";    // stores combined IP number
-            // checking if IP number has been typed wrongly
+            // checking if wrong IP number has been typed
             if (textBoxIpFirst.Text == "" || textBoxIpSecond.Text == "" || textBoxIpThird.Text == "" || textBoxIpFourth.Text == "")
             {
                 bIP = false;
@@ -221,7 +222,7 @@ namespace XML_Reader_GUI.Secondary_Forms
 
                 ErrorCode _error = Global.MainPlc.Open();  // open connection with physical PLC
 
-                if (_error == 0)    // enum ErrorCode == 0 means connection has been established
+                if (_error == ErrorCode.NoError)    // if connection with PLC has been established
                 {
                     // create and show a form saying that the connection has been established succesfully
                     var form = new popupPlcConnection("Conncetion with PLC established succesfully", "", true);
@@ -234,11 +235,8 @@ namespace XML_Reader_GUI.Secondary_Forms
                     form.Show();
                 }
 
-                // CLOSE CONNECTION
-                // OBSOLETE IN THIS PART OF CODE
-                //plc.Close();
             }
-            else    // if a piece of data has been typed wrong
+            else    // if a piece of data has been typed incorrectly
             {
                 // Create message
                 string msgHeader = "Wrong input values!";
@@ -262,11 +260,11 @@ namespace XML_Reader_GUI.Secondary_Forms
 
         private void buttonSendData_Click(object sender, EventArgs e)
         {
-            if (Global.MainPlc != null)
+            if (Global.MainPlc != null)                     // Plc variable has been initialized
             {
-                if (Global.MainPlc.IsConnected)
+                if (Global.MainPlc.IsConnected)             // if connection with PLC has been established
                 {
-                    byte[] sendData = PrepareDataToSend();
+                    byte[] sendData = PrepareDataToSend();  // prepare and save data to send
                     ErrorCode _error = Global.MainPlc.WriteBytes(DataType.DataBlock, 30, 0, sendData);     // send data
 
                     if (_error == ErrorCode.NoError)
@@ -290,21 +288,20 @@ namespace XML_Reader_GUI.Secondary_Forms
 
 
         private void buttonSendString_Click(object sender, EventArgs e)
-        {
-           
-            string _str = textBoxOutputString.Text;
-            byte[] _bytes = S7.Net.Types.String.ToByteArray(_str);  // data 
-            byte max_len = (byte)100;
-            byte actual_len = (byte)_str.Length;
+        {        
+            string _str = textBoxOutputString.Text;                 // take save string to variable
+            byte[] _bytes = S7.Net.Types.String.ToByteArray(_str);  // convert string to byte[] array
+            byte max_len = (byte)100;                               // max legth of string
+            byte actual_len = (byte)_str.Length;                    // actual length of sent string 
 
-            List<byte> Message = new List<byte>();
-            Message.Add(max_len);
-            Message.Add(actual_len);
-            Message.AddRange(_bytes);
+            List<byte> Message = new List<byte>();                  // create list of bytes
+            Message.Add(max_len);                                   // 
+            Message.Add(actual_len);                                //  
+            Message.AddRange(_bytes);                               // 
 
-            if (Global.MainPlc != null)
+            if (Global.MainPlc != null)                             // Plc variable has been initialized
             {
-                if (Global.MainPlc.IsConnected)
+                if (Global.MainPlc.IsConnected)                     // Connection with PLC has been established
                 {
                     ErrorCode _error = Global.MainPlc.WriteBytes(DataType.DataBlock, 30, 14, Message.ToArray());     // send data
                     
@@ -327,7 +324,10 @@ namespace XML_Reader_GUI.Secondary_Forms
             }
         }
 
-
+        /// <summary>
+        /// Change data to byte[] array and return the array
+        /// </summary>
+        /// <returns> array of byte[] of data, prepared to be sent to PLC </returns>
         private byte[] PrepareDataToSend()
         {
             byte[] sendData = new byte[8];

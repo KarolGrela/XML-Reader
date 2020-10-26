@@ -34,6 +34,9 @@ namespace XML_Reader_GUI.Secondary_Forms
             passiveColor = Color.DimGray;                   // color of button while desactivated/unused
             panelSegmentsHeader.Height = 35;                // hiding the panel
 
+            ///
+            /// Saving data from "reader" variable to Data Grid
+            ///
             if (reader!=null)   // if xml has been read and XMLReader variable has been passed to local copy
             {
                 // create row for each segment
@@ -53,8 +56,8 @@ namespace XML_Reader_GUI.Secondary_Forms
                         new object[]
                         {
                             id, s, l, w_a, p_s, p_e, p_c, s_o_c
-                        }               
-                            );
+                        } 
+                        );
                 }
             }
         }
@@ -71,13 +74,11 @@ namespace XML_Reader_GUI.Secondary_Forms
         private void iconButtonSegmentData_Click(object sender, EventArgs e)
         {
             if((IconButton)sender == currentButton)
-            {
-                panelSegmentsHeader.Height = 35;
+            { 
                 DesactivateButton();
             }
             else 
-            {
-                panelSegmentsHeader.Height = 370;
+            {              
                 ActivateButton(sender);
             }
         }
@@ -94,6 +95,7 @@ namespace XML_Reader_GUI.Secondary_Forms
         /// <param name="senderButton">  </param>
         private void ActivateButton(object senderButton)
         {
+            panelSegmentsHeader.Height = 370;
             currentButton = (IconButton)senderButton;
             currentButton.ForeColor = activeColor;
             currentButton.IconColor = activeColor;
@@ -104,6 +106,7 @@ namespace XML_Reader_GUI.Secondary_Forms
         /// </summary>
         private void DesactivateButton()
         {
+            panelSegmentsHeader.Height = 35;
             currentButton.ForeColor = passiveColor;
             currentButton.IconColor = passiveColor;
             currentButton = null;

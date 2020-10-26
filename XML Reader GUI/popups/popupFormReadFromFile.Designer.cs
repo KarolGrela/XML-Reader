@@ -117,7 +117,7 @@
             this.labelStackTrace.Name = "labelStackTrace";
             this.labelStackTrace.Size = new System.Drawing.Size(766, 180);
             this.labelStackTrace.TabIndex = 5;
-            this.labelStackTrace.Text = " ";
+            this.labelStackTrace.Text = "  labelStackTrace";
             this.labelStackTrace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // popupFormReadFromFile
