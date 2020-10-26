@@ -39,7 +39,8 @@
             this.labelEnvironmentVersionFill = new System.Windows.Forms.Label();
             this.labelEnvironmentVersion = new System.Windows.Forms.Label();
             this.labelTimestampFill = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelTimestamp = new System.Windows.Forms.Label();
+            this.buttonSendString = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelProductionAreaFill
@@ -146,21 +147,37 @@
             // 
             this.labelTimestampFill.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelTimestampFill.AutoSize = true;
-            this.labelTimestampFill.Location = new System.Drawing.Point(580, 363);
+            this.labelTimestampFill.Location = new System.Drawing.Point(580, 314);
             this.labelTimestampFill.Name = "labelTimestampFill";
             this.labelTimestampFill.Size = new System.Drawing.Size(36, 20);
             this.labelTimestampFill.TabIndex = 20;
             this.labelTimestampFill.Text = "XXX";
             // 
-            // label2
+            // labelTimestamp
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(488, 363);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 20);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Timestamp:";
+            this.labelTimestamp.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTimestamp.AutoSize = true;
+            this.labelTimestamp.Location = new System.Drawing.Point(488, 314);
+            this.labelTimestamp.Name = "labelTimestamp";
+            this.labelTimestamp.Size = new System.Drawing.Size(86, 20);
+            this.labelTimestamp.TabIndex = 19;
+            this.labelTimestamp.Text = "Timestamp:";
+            // 
+            // buttonSendString
+            // 
+            this.buttonSendString.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSendString.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonSendString.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.buttonSendString.FlatAppearance.BorderSize = 0;
+            this.buttonSendString.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSendString.ForeColor = System.Drawing.Color.White;
+            this.buttonSendString.Location = new System.Drawing.Point(492, 357);
+            this.buttonSendString.Name = "buttonSendString";
+            this.buttonSendString.Size = new System.Drawing.Size(124, 41);
+            this.buttonSendString.TabIndex = 40;
+            this.buttonSendString.Text = "Send to PLC";
+            this.buttonSendString.UseVisualStyleBackColor = false;
+            this.buttonSendString.Click += new System.EventHandler(this.buttonSendString_Click);
             // 
             // FileInfoForm
             // 
@@ -168,8 +185,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(850, 410);
+            this.Controls.Add(this.buttonSendString);
             this.Controls.Add(this.labelTimestampFill);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelTimestamp);
             this.Controls.Add(this.labelEnvironmentVersionFill);
             this.Controls.Add(this.labelEnvironmentVersion);
             this.Controls.Add(this.labelVersionFill);
@@ -203,6 +221,7 @@
         private System.Windows.Forms.Label labelEnvironmentVersionFill;
         private System.Windows.Forms.Label labelEnvironmentVersion;
         private System.Windows.Forms.Label labelTimestampFill;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTimestamp;
+        private System.Windows.Forms.Button buttonSendString;
     }
 }

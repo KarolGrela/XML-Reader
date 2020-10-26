@@ -62,6 +62,11 @@ namespace XML_Reader_GUI.Secondary_Forms
             this.labelLifebitFill = new System.Windows.Forms.Label();
             this.labelLifebit = new System.Windows.Forms.Label();
             this.buttonSendData = new System.Windows.Forms.Button();
+            this.buttonRcvData = new System.Windows.Forms.Button();
+            this.textBoxOutputString = new System.Windows.Forms.TextBox();
+            this.buttonSendString = new System.Windows.Forms.Button();
+            this.labelEnterString = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panelIpNumber.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -396,12 +401,69 @@ namespace XML_Reader_GUI.Secondary_Forms
             this.buttonSendData.UseVisualStyleBackColor = false;
             this.buttonSendData.Click += new System.EventHandler(this.buttonSendData_Click);
             // 
+            // buttonRcvData
+            // 
+            this.buttonRcvData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonRcvData.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.buttonRcvData.FlatAppearance.BorderSize = 0;
+            this.buttonRcvData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRcvData.ForeColor = System.Drawing.Color.White;
+            this.buttonRcvData.Location = new System.Drawing.Point(627, 179);
+            this.buttonRcvData.Name = "buttonRcvData";
+            this.buttonRcvData.Size = new System.Drawing.Size(89, 41);
+            this.buttonRcvData.TabIndex = 37;
+            this.buttonRcvData.Text = "Rcv Data";
+            this.buttonRcvData.UseVisualStyleBackColor = false;
+            this.buttonRcvData.Click += new System.EventHandler(this.buttonRcvData_Click);
+            // 
+            // textBoxOutputString
+            // 
+            this.textBoxOutputString.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.textBoxOutputString.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxOutputString.ForeColor = System.Drawing.Color.White;
+            this.textBoxOutputString.Location = new System.Drawing.Point(531, 273);
+            this.textBoxOutputString.Name = "textBoxOutputString";
+            this.textBoxOutputString.Size = new System.Drawing.Size(234, 20);
+            this.textBoxOutputString.TabIndex = 38;
+            // 
+            // buttonSendString
+            // 
+            this.buttonSendString.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonSendString.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.buttonSendString.FlatAppearance.BorderSize = 0;
+            this.buttonSendString.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSendString.ForeColor = System.Drawing.Color.White;
+            this.buttonSendString.Location = new System.Drawing.Point(652, 299);
+            this.buttonSendString.Name = "buttonSendString";
+            this.buttonSendString.Size = new System.Drawing.Size(113, 41);
+            this.buttonSendString.TabIndex = 39;
+            this.buttonSendString.Text = "Send string";
+            this.buttonSendString.UseVisualStyleBackColor = false;
+            this.buttonSendString.Click += new System.EventHandler(this.buttonSendString_Click);
+            // 
+            // labelEnterString
+            // 
+            this.labelEnterString.AutoSize = true;
+            this.labelEnterString.Location = new System.Drawing.Point(441, 273);
+            this.labelEnterString.Name = "labelEnterString";
+            this.labelEnterString.Size = new System.Drawing.Size(87, 20);
+            this.labelEnterString.TabIndex = 40;
+            this.labelEnterString.Text = "Enter string:";
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
             // SendDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(850, 400);
+            this.Controls.Add(this.labelEnterString);
+            this.Controls.Add(this.buttonSendString);
+            this.Controls.Add(this.textBoxOutputString);
+            this.Controls.Add(this.buttonRcvData);
             this.Controls.Add(this.buttonSendData);
             this.Controls.Add(this.labelLifebitFill);
             this.Controls.Add(this.labelLifebit);
@@ -472,5 +534,10 @@ namespace XML_Reader_GUI.Secondary_Forms
         private System.Windows.Forms.Label labelLifebitFill;
         private System.Windows.Forms.Label labelLifebit;
         private System.Windows.Forms.Button buttonSendData;
+        private System.Windows.Forms.Button buttonRcvData;
+        private System.Windows.Forms.TextBox textBoxOutputString;
+        private System.Windows.Forms.Button buttonSendString;
+        private System.Windows.Forms.Label labelEnterString;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

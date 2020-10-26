@@ -14,7 +14,7 @@ using XML_Reader_GUI.popups;
 using FontAwesome;
 
 namespace XML_Reader_GUI.Secondary_Forms
-{    
+{
     public partial class SendDataForm : Form
     {
         /// <summary>
@@ -24,15 +24,19 @@ namespace XML_Reader_GUI.Secondary_Forms
         /// <param name="ip"> IP number of the CPU, of type string </param>
         /// <param name="rack"> number of rack, of type Int16 </param>
         /// <param name="slot"> number of slot, of type Int16 </param>
-        private Plc plc; // = new Plc(CpuType.S71500, "192.168.0.2", 0, 1);
 
         private XMLReader reader;
+        //private Plc plc;
+        private string global_lifebit = "no_data";
+        private string global_z = "no_data";
+        private string global_char = "no_data";
 
 
         public SendDataForm(XMLReader xmlFile)
         {
             InitializeComponent();
             reader = xmlFile;
+            //this.plc = mainPlc;
 
             comboBoxPlcType.SelectedItem = S7.Net.CpuType.S71500;   // Select PLC S71200
             textBoxIpFirst.Text = "192";
@@ -69,7 +73,7 @@ namespace XML_Reader_GUI.Secondary_Forms
             }
         }
 
-     
+
         private void textBoxIpFirst_LostFocus(object sender, EventArgs e)
         {
             int number;
@@ -152,9 +156,9 @@ namespace XML_Reader_GUI.Secondary_Forms
 
         private void textBoxCharSent_LostFocus(object sender, EventArgs e)
         {
-            if(textBoxCharSent.Text.Length>1)
+            if (textBoxCharSent.Text.Length > 1)
             {
-                textBoxCharSent.Text = textBoxCharSent.Text.Remove(1, textBoxCharSent.Text.Length-1);
+                textBoxCharSent.Text = textBoxCharSent.Text.Remove(1, textBoxCharSent.Text.Length - 1);
             }
         }
 
@@ -180,7 +184,7 @@ namespace XML_Reader_GUI.Secondary_Forms
                 // if type of PLC has been selected
                 comboBoxPlcType.SelectedItem = S7.Net.CpuType.S71200;   // Select PLC S71200
                 type = (CpuType)comboBoxPlcType.SelectedItem;           // save chosen type to variable
-            }                      
+            }
 
             string ipNumber = "";    // stores combined IP number
             // checking if IP number has been typed wrongly
@@ -210,12 +214,12 @@ namespace XML_Reader_GUI.Secondary_Forms
             }
 
             // if everything is OK
-            if(bIP && bRack && bSlot)
+            if (bIP && bRack && bSlot)
             {
                 // initialize Plc variable
-                plc = new Plc(type, ipNumber, Int16.Parse(textBoxRack.Text), Int16.Parse(textBoxSlot.Text));
+                Global.MainPlc = new Plc(type, ipNumber, Int16.Parse(textBoxRack.Text), Int16.Parse(textBoxSlot.Text));
 
-                ErrorCode _error = plc.Open();  // open connection with physical PLC
+                ErrorCode _error = Global.MainPlc.Open();  // open connection with physical PLC
 
                 if (_error == 0)    // enum ErrorCode == 0 means connection has been established
                 {
@@ -258,23 +262,81 @@ namespace XML_Reader_GUI.Secondary_Forms
 
         private void buttonSendData_Click(object sender, EventArgs e)
         {
-            if (plc.IsConnected)
-            { 
-                byte[] sendData = PrepareDataToSend();
-                ErrorCode _error = plc.WriteBytes(DataType.DataBlock, 30, 0, sendData);     // send data
+            if (Global.MainPlc != null)
+            {
+                if (Global.MainPlc.IsConnected)
+                {
+                    byte[] sendData = PrepareDataToSend();
+                    ErrorCode _error = Global.MainPlc.WriteBytes(DataType.DataBlock, 30, 0, sendData);     // send data
+
+                    if (_error == ErrorCode.NoError)
+                    {
+                        var form = new popupPlcConnection("Data sent succesfully", "", true);
+                        form.Show();
+                    }
+                    else
+                    {
+                        var form = new popupPlcConnection("Data haven't been sent", $"Encountered difficulty:\n{_error}", false);
+                        form.Show();
+                    }
+                }
+            }
+            else
+            {
+                var form = new popupPlcConnection("Data haven't been sent", "PLC isn't connected!", false);
+                form.Show();
             }
         }
+
+
+        private void buttonSendString_Click(object sender, EventArgs e)
+        {
+           
+            string _str = textBoxOutputString.Text;
+            byte[] _bytes = S7.Net.Types.String.ToByteArray(_str);  // data 
+            byte max_len = (byte)100;
+            byte actual_len = (byte)_str.Length;
+
+            List<byte> Message = new List<byte>();
+            Message.Add(max_len);
+            Message.Add(actual_len);
+            Message.AddRange(_bytes);
+
+            if (Global.MainPlc != null)
+            {
+                if (Global.MainPlc.IsConnected)
+                {
+                    ErrorCode _error = Global.MainPlc.WriteBytes(DataType.DataBlock, 30, 14, Message.ToArray());     // send data
+                    
+                    if (_error == ErrorCode.NoError)
+                    {
+                        var form = new popupPlcConnection("Data sent succesfully", "", true);
+                        form.Show();
+                    }
+                    else
+                    {
+                        var form = new popupPlcConnection("Data haven't been sent", $"Encountered difficulty:\n{_error}", false);
+                        form.Show();
+                    }
+                }
+            }
+            else
+            {
+                var form = new popupPlcConnection("Data haven't been sent", $"PLC isn't connected!", false);
+                form.Show();
+            }
+        }
+
 
         private byte[] PrepareDataToSend()
         {
             byte[] sendData = new byte[8];
 
-            /// preparing boolean value
-            if (labelLifebitFill.Text == "false" || labelLifebitFill.Text == "no_data")
+            if (global_lifebit == "no_data" || global_lifebit == "False")
             {
-                sendData[0] = 1;    // first cycle
+                sendData[0] = 1;
             }
-            else if (labelLifebitFill.Text == "true")
+            else if (global_lifebit == "True")
             {
                 sendData[0] = 0;
             }
@@ -283,7 +345,7 @@ namespace XML_Reader_GUI.Secondary_Forms
             // preparing x variable
             short x;
             bool b_x = Int16.TryParse(textBoxX.Text, out x);
-            if(b_x == false)
+            if (b_x == false)
             {
                 x = 0;
             }
@@ -324,5 +386,74 @@ namespace XML_Reader_GUI.Secondary_Forms
 
         #endregion
 
+
+        #region Rcv Data
+
+        private void RcvDataFromPlc()
+        {
+
+            if (Global.MainPlc != null)
+            { 
+                if (Global.MainPlc.IsConnected)
+                { 
+
+                    /// <summary>
+                    /// Method "ReadBytes" is used to read data from memory of the PLC
+                    /// </summary>
+                    /// <param name="dataType"> specifies where the read data is stored (DB, Memory, Inputs, Outputsm etc  </param>
+                    /// <param name="db"> address of the datatype, eg. if we reaed from DB45 then db = 45 </param>
+                    /// <param name="startByteAdr"> address of first byte that is to be read </param>
+                    /// <param name="count"> amount of read bytes </param>
+                    byte[] rcvData = Global.MainPlc.ReadBytes(DataType.DataBlock, 30, 8, 6);     // read data and save them to a global variable "data" 
+
+                    if (rcvData != null)
+                    {
+                        // saving boolean data
+                        bool bit = BitConverter.ToBoolean(rcvData, 0);
+                        if (bit == false)
+                        {
+                            global_lifebit = "True";
+                        }
+                        else
+                        {
+                            global_lifebit = "False";
+                        }
+
+                        // saving integer values
+                        byte[] iData = { 1, 2 };
+                        iData[0] = rcvData[3];
+                        iData[1] = rcvData[2];
+                        short z = BitConverter.ToInt16(iData, 0);
+                        global_z = z.ToString();
+
+                        // saving char values
+                        char c = BitConverter.ToChar(rcvData, 4);
+                        global_char = c.ToString();
+                    }
+                    else
+                    {
+                        global_lifebit = "no_data";
+                        global_z = "no_data";
+                        global_char = "no_ data";
+                    }
+                }
+            }
+        }
+
+        private void buttonRcvData_Click(object sender, EventArgs e)
+        {
+            RcvDataFromPlc();
+            labelCharRcvdFill.Text = global_char;
+            labelZFill.Text = global_z;
+            labelLifebitFill.Text = global_lifebit;
+        }
+
+
+        #endregion
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
     }
 }

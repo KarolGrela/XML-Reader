@@ -16,6 +16,7 @@ using System.Security.Cryptography;
 using System.Diagnostics.Tracing;
 using XML_Reader_GUI.Secondary_Forms;
 using XML_Reader_GUI.popups;
+using S7.Net;
 
 
 namespace XML_Reader_GUI
@@ -25,6 +26,7 @@ namespace XML_Reader_GUI
         private Button currentButton;
         private Form currentChildForm;
 
+         // = new Plc(CpuType.S71500, "192.168.0.2", 0, 1);
         private XMLReader reader;
 
         public mainMenuForm()
