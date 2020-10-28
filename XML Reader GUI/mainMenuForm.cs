@@ -26,7 +26,6 @@ namespace XML_Reader_GUI
         private Button currentButton;
         private Form currentChildForm;
 
-         // = new Plc(CpuType.S71500, "192.168.0.2", 0, 1);
         private XMLReader reader;
 
         public mainMenuForm()
@@ -120,7 +119,7 @@ namespace XML_Reader_GUI
                 if (currentChildForm != null) currentChildForm.Close();
 
                 currentChildForm = childForm;                       // saving a reference to the child form inside of the main form
-                childForm.TopLevel = false;                          // enables child form to be docked to panel "panelDesktop"
+                childForm.TopLevel = false;                         // enables child form to be docked to panel "panelDesktop"
                 childForm.FormBorderStyle = FormBorderStyle.None;   // delete edge of the form
                 childForm.Dock = DockStyle.Fill;                    // fill panel
                 panelDesktop.Controls.Add(childForm);               // dock child form to "panelDesktop"
