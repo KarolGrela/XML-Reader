@@ -365,35 +365,48 @@ namespace XML_Reader_GUI
 
         private void buttonReadFileFromFolder_Click(object sender, EventArgs e)
         {
+            /*
+             * get directory of folder where .exe file is located
+             */
             // get path of the .exe file
             string path = System.Reflection.Assembly.GetEntryAssembly().Location;
+            // get name of .exe file (without extension)
+            string assemblyFullName = System.Reflection.Assembly.GetEntryAssembly().GetName().Name;
+            // add extension to the name
+            assemblyFullName += ".exe";
+            // remove name of .exe file from directory
+            int toRemove = path.Length - assemblyFullName.Length;
+            // variable "path" contains direcotry of folder where .exe file is saved
 
-            // remove name of .exe file
-            int toRemove = path.Length - 18;
+            /*
+             * Read first encountered XML file from "_XML File" folder
+             */
+            // create path to "_XML File" folder, where XML files are stored
             path = path.Remove(toRemove) + "_XML File";
 
+            // get paths of all files inside the folder (List of strings)
             var files = Directory.EnumerateFiles(path);
 
-            int count = 0;
-            bool fileExists = false;
-            foreach (string element in files)
-            {
-                if (element.EndsWith(".xml"))
-                {
-                    path = element;
-                    fileExists = true;
-                    break;
+            bool xmlFileExists = false;         // true if there is at least one xml file inside of the folder
+            string xmlPath = null;              // variable which contains path to XML file
+            foreach (string element in files)   // Loop thorugh the files in folder
+            {               
+                if (element.EndsWith(".xml"))   // if loop encounters an XML file
+                {                               
+                    xmlPath = element;          // save path of element
+                    xmlFileExists = true;       // memory which indicates that there is a valid XML file inside of the folder
+                    break;                      // break the loop as the file has already been chosen
                 }
-                count++;
             }
 
-            if (fileExists)
+            if (xmlFileExists)
             {
-                ReadXMLFile(path);
+                ReadXMLFile(xmlPath);
             }
             else
             {
-                // do nothing
+                CallPopup("There is no XML file in \"_XML File\" folder!", "Insert an XML file into the folder in order to read it!");
+                // NOTE: validity of the XML file is checked later
             }
 
         }
