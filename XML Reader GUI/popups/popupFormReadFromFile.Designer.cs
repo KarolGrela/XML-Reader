@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(popupFormReadFromFile));
             this.panelTop = new System.Windows.Forms.Panel();
             this.labelTop = new System.Windows.Forms.Label();
-            this.iconButtonExit = new FontAwesome.Sharp.IconButton();
             this.iconPictureBoxWarning = new FontAwesome.Sharp.IconPictureBox();
             this.labelMessage = new System.Windows.Forms.Label();
             this.labelStackTrace = new System.Windows.Forms.Label();
@@ -42,7 +42,6 @@
             // 
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
             this.panelTop.Controls.Add(this.labelTop);
-            this.panelTop.Controls.Add(this.iconButtonExit);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -53,38 +52,20 @@
             // 
             // labelTop
             // 
-            this.labelTop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
             this.labelTop.Font = new System.Drawing.Font("Segoe UI", 15.25F);
             this.labelTop.ForeColor = System.Drawing.Color.White;
-            this.labelTop.Location = new System.Drawing.Point(55, 0);
+            this.labelTop.Location = new System.Drawing.Point(0, 0);
             this.labelTop.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTop.Name = "labelTop";
-            this.labelTop.Size = new System.Drawing.Size(736, 35);
+            this.labelTop.Size = new System.Drawing.Size(834, 35);
             this.labelTop.TabIndex = 4;
             this.labelTop.Text = "Error while reading XML file from folder";
             this.labelTop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelTop_MouseMove);
-            // 
-            // iconButtonExit
-            // 
-            this.iconButtonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconButtonExit.FlatAppearance.BorderSize = 0;
-            this.iconButtonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButtonExit.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.iconButtonExit.IconChar = FontAwesome.Sharp.IconChar.WindowClose;
-            this.iconButtonExit.IconColor = System.Drawing.Color.White;
-            this.iconButtonExit.IconSize = 16;
-            this.iconButtonExit.Location = new System.Drawing.Point(799, 0);
-            this.iconButtonExit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.iconButtonExit.Name = "iconButtonExit";
-            this.iconButtonExit.Rotation = 0D;
-            this.iconButtonExit.Size = new System.Drawing.Size(35, 35);
-            this.iconButtonExit.TabIndex = 5;
-            this.iconButtonExit.UseVisualStyleBackColor = true;
-            this.iconButtonExit.Click += new System.EventHandler(this.iconButtonExit_Click);
-            this.iconButtonExit.MouseEnter += new System.EventHandler(this.iconButtonExit_MouseEnter);
-            this.iconButtonExit.MouseLeave += new System.EventHandler(this.iconButtonExit_MouseLeave);
             // 
             // iconPictureBoxWarning
             // 
@@ -132,6 +113,7 @@
             this.Controls.Add(this.panelTop);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximumSize = new System.Drawing.Size(850, 400);
             this.MinimumSize = new System.Drawing.Size(850, 400);
@@ -145,7 +127,6 @@
 
         #endregion
         private System.Windows.Forms.Panel panelTop;
-        private FontAwesome.Sharp.IconButton iconButtonExit;
         private System.Windows.Forms.Label labelTop;
         private FontAwesome.Sharp.IconPictureBox iconPictureBoxWarning;
         private System.Windows.Forms.Label labelMessage;

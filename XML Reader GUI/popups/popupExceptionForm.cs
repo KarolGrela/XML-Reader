@@ -19,9 +19,6 @@ namespace XML_Reader_GUI
 
             this.DoubleBuffered = true; // prevent from graphics flicker
 
-            // getting rid of the control box
-            this.ControlBox = false;
-            this.Text = String.Empty;
         }
 
 
@@ -62,27 +59,5 @@ namespace XML_Reader_GUI
         #endregion
 
 
-
-        #region Top Right Corner Buttons
-
-        // Close window button
-        private void iconButtonExit_MouseEnter(object sender, System.EventArgs e)
-        {
-            iconButtonExit.IconColor = Color.IndianRed;
-            iconButtonExit.ForeColor = Color.IndianRed;
-        }
-
-        private void iconButtonExit_MouseLeave(object sender, System.EventArgs e)
-        {
-            iconButtonExit.IconColor = Color.White;
-            iconButtonExit.ForeColor = Color.White;
-        }
-
-        private void iconButtonExit_Click(object sender, EventArgs e)
-        {
-            this.Close();       // close this form, not whole process
-        }
-
-        #endregion
     }
 }
