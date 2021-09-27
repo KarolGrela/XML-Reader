@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainMenuForm));
             this.panelSideMenu = new System.Windows.Forms.Panel();
+            this.buttonSendData = new System.Windows.Forms.Button();
             this.buttonLeftBorderPanel = new System.Windows.Forms.Panel();
             this.labelTopLeft = new System.Windows.Forms.Label();
             this.buttonZones = new System.Windows.Forms.Button();
@@ -39,8 +40,6 @@
             this.buttonPosinitPoints = new System.Windows.Forms.Button();
             this.buttonSegmentData = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.iconButtonMinimize = new FontAwesome.Sharp.IconButton();
-            this.iconButtonExit = new FontAwesome.Sharp.IconButton();
             this.labelTop = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.panelIndicator = new System.Windows.Forms.Panel();
@@ -51,7 +50,6 @@
             this.buttonReadBrowsedFile = new System.Windows.Forms.Button();
             this.labelOR = new System.Windows.Forms.Label();
             this.buttonReadFileFromFolder = new System.Windows.Forms.Button();
-            this.buttonSendData = new System.Windows.Forms.Button();
             this.panelSideMenu.SuspendLayout();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -78,6 +76,19 @@
             this.panelSideMenu.Size = new System.Drawing.Size(271, 591);
             this.panelSideMenu.TabIndex = 0;
             this.panelSideMenu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelSideMenu_MouseMove);
+            // 
+            // buttonSendData
+            // 
+            this.buttonSendData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
+            this.buttonSendData.FlatAppearance.BorderSize = 0;
+            this.buttonSendData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSendData.Location = new System.Drawing.Point(0, 515);
+            this.buttonSendData.Name = "buttonSendData";
+            this.buttonSendData.Size = new System.Drawing.Size(271, 70);
+            this.buttonSendData.TabIndex = 10;
+            this.buttonSendData.Text = "Send Data to PLC";
+            this.buttonSendData.UseVisualStyleBackColor = false;
+            this.buttonSendData.Click += new System.EventHandler(this.buttonSendData_Click);
             // 
             // buttonLeftBorderPanel
             // 
@@ -181,8 +192,6 @@
             this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.panelTop.Controls.Add(this.iconButtonMinimize);
-            this.panelTop.Controls.Add(this.iconButtonExit);
             this.panelTop.Controls.Add(this.labelTop);
             this.panelTop.Location = new System.Drawing.Point(272, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -191,52 +200,16 @@
             this.panelTop.TabIndex = 1;
             this.panelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseMove);
             // 
-            // iconButtonMinimize
-            // 
-            this.iconButtonMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconButtonMinimize.FlatAppearance.BorderSize = 0;
-            this.iconButtonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButtonMinimize.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.iconButtonMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
-            this.iconButtonMinimize.IconColor = System.Drawing.Color.White;
-            this.iconButtonMinimize.IconSize = 16;
-            this.iconButtonMinimize.Location = new System.Drawing.Point(837, 0);
-            this.iconButtonMinimize.Name = "iconButtonMinimize";
-            this.iconButtonMinimize.Rotation = 0D;
-            this.iconButtonMinimize.Size = new System.Drawing.Size(35, 35);
-            this.iconButtonMinimize.TabIndex = 5;
-            this.iconButtonMinimize.UseVisualStyleBackColor = true;
-            this.iconButtonMinimize.Click += new System.EventHandler(this.iconButtonMinimize_Click);
-            this.iconButtonMinimize.MouseEnter += new System.EventHandler(this.iconButtonMinimize_MouseEnter);
-            this.iconButtonMinimize.MouseLeave += new System.EventHandler(this.iconButtonMinimize_MouseLeave);
-            // 
-            // iconButtonExit
-            // 
-            this.iconButtonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconButtonExit.FlatAppearance.BorderSize = 0;
-            this.iconButtonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButtonExit.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.iconButtonExit.IconChar = FontAwesome.Sharp.IconChar.WindowClose;
-            this.iconButtonExit.IconColor = System.Drawing.Color.White;
-            this.iconButtonExit.IconSize = 16;
-            this.iconButtonExit.Location = new System.Drawing.Point(873, 0);
-            this.iconButtonExit.Name = "iconButtonExit";
-            this.iconButtonExit.Rotation = 0D;
-            this.iconButtonExit.Size = new System.Drawing.Size(35, 35);
-            this.iconButtonExit.TabIndex = 4;
-            this.iconButtonExit.UseVisualStyleBackColor = true;
-            this.iconButtonExit.Click += new System.EventHandler(this.iconButtonExit_Click);
-            this.iconButtonExit.MouseEnter += new System.EventHandler(this.iconButtonExit_MouseEnter);
-            this.iconButtonExit.MouseLeave += new System.EventHandler(this.iconButtonExit_MouseLeave);
-            // 
             // labelTop
             // 
-            this.labelTop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
             this.labelTop.Font = new System.Drawing.Font("Segoe UI", 15.25F);
             this.labelTop.Location = new System.Drawing.Point(-1, 0);
             this.labelTop.Name = "labelTop";
-            this.labelTop.Size = new System.Drawing.Size(832, 35);
+            this.labelTop.Size = new System.Drawing.Size(912, 35);
             this.labelTop.TabIndex = 3;
             this.labelTop.Text = "Main Screen";
             this.labelTop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -352,19 +325,6 @@
             this.buttonReadFileFromFolder.UseVisualStyleBackColor = false;
             this.buttonReadFileFromFolder.Click += new System.EventHandler(this.buttonReadFileFromFolder_Click);
             // 
-            // buttonSendData
-            // 
-            this.buttonSendData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(34)))), ((int)(((byte)(35)))));
-            this.buttonSendData.FlatAppearance.BorderSize = 0;
-            this.buttonSendData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSendData.Location = new System.Drawing.Point(0, 515);
-            this.buttonSendData.Name = "buttonSendData";
-            this.buttonSendData.Size = new System.Drawing.Size(271, 70);
-            this.buttonSendData.TabIndex = 10;
-            this.buttonSendData.Text = "Send Data to PLC";
-            this.buttonSendData.UseVisualStyleBackColor = false;
-            this.buttonSendData.Click += new System.EventHandler(this.buttonSendData_Click);
-            // 
             // mainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -405,8 +365,6 @@
         private System.Windows.Forms.Label labelTopLeft;
         private System.Windows.Forms.Panel buttonLeftBorderPanel;
         private System.Windows.Forms.Label labelTop;
-        private FontAwesome.Sharp.IconButton iconButtonMinimize;
-        private FontAwesome.Sharp.IconButton iconButtonExit;
         private System.Windows.Forms.Panel panelIndicator;
         private System.Windows.Forms.Panel panelDesktop;
         private System.Windows.Forms.Label labelMainScreen;

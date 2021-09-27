@@ -36,8 +36,8 @@ namespace XML_Reader_GUI
             this.DoubleBuffered = true;
 
             // getting rid of the control box
-            this.ControlBox = false;
-            this.Text = String.Empty;
+            //this.ControlBox = true;
+            this.Text = "XML Reader";//String.Empty;
 
             // setting minimal size of the form
             this.MinimumSize = new Size(1055, 615);
@@ -271,7 +271,7 @@ namespace XML_Reader_GUI
 
         #endregion
 
-
+        /*
         #region Top Right Corner Buttons
 
         // Close window button
@@ -311,7 +311,7 @@ namespace XML_Reader_GUI
         }
 
         #endregion
-
+        */
 
         #region Reading from XML file
 
