@@ -384,31 +384,37 @@ namespace XML_Reader_GUI
             // create path to "_XML File" folder, where XML files are stored
             path = path.Remove(toRemove) + "_XML File";
 
-            // get paths of all files inside the folder (List of strings)
-            var files = Directory.EnumerateFiles(path);
+            try
+            {
+                // get paths of all files inside the folder (List of strings)
+                var files = Directory.EnumerateFiles(path);
 
-            bool xmlFileExists = false;         // true if there is at least one xml file inside of the folder
-            string xmlPath = null;              // variable which contains path to XML file
-            foreach (string element in files)   // Loop thorugh the files in folder
-            {               
-                if (element.EndsWith(".xml"))   // if loop encounters an XML file
-                {                               
-                    xmlPath = element;          // save path of element
-                    xmlFileExists = true;       // memory which indicates that there is a valid XML file inside of the folder
-                    break;                      // break the loop as the file has already been chosen
+                bool xmlFileExists = false;         // true if there is at least one xml file inside of the folder
+                string xmlPath = null;              // variable which contains path to XML file
+                foreach (string element in files)   // Loop thorugh the files in folder
+                {
+                    if (element.EndsWith(".xml"))   // if loop encounters an XML file
+                    {
+                        xmlPath = element;          // save path of element
+                        xmlFileExists = true;       // memory which indicates that there is a valid XML file inside of the folder
+                        break;                      // break the loop as the file has already been chosen
+                    }
+                }
+
+                if (xmlFileExists)
+                {
+                    ReadXMLFile(xmlPath);
+                }
+                else
+                {
+                    CallPopup("There is no XML file in \"_XML File\" folder!", "Insert an XML file into the folder in order to read it!");
+                    // NOTE: validity of the XML file is checked later
                 }
             }
-
-            if (xmlFileExists)
+            catch (Exception ex)
             {
-                ReadXMLFile(xmlPath);
+                CallPopup(ex.Message, ex.StackTrace);
             }
-            else
-            {
-                CallPopup("There is no XML file in \"_XML File\" folder!", "Insert an XML file into the folder in order to read it!");
-                // NOTE: validity of the XML file is checked later
-            }
-
         }
 
 
