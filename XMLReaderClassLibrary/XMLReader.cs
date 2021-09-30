@@ -30,6 +30,9 @@ namespace XMLReaderClassLibrary
         private bool b_symbolic_point_groups;
         private bool b_zones;
 
+        
+        private string s_version;
+
         #endregion
 
         #region XML Files
@@ -45,6 +48,7 @@ namespace XMLReaderClassLibrary
         public SymbolicPointGroups symbolicPointGroups;
         public SymbolicPoints symbolicPoints;
         public Zones zones;
+        public bool b_confirmation;
 
         // string with read data
         public string dataString;
@@ -71,7 +75,10 @@ namespace XMLReaderClassLibrary
             b_symbolic_point_groups = false;
             b_zones = false;
 
-            
+            // reading verification
+            b_confirmation = false;
+            s_version = null;
+
             Path = path;                                // saving path to string
             xmlFile = XmlReader.Create(path);           // initialize XmlReader variable
             ReadFile();                                 // begin reading file
@@ -91,7 +98,11 @@ namespace XMLReaderClassLibrary
             try
             {
                 xmlFile.Read();
-                xmlFile.GetAttribute("version");
+                s_version = xmlFile.GetAttribute("version");
+                if(s_version != null)
+                {
+                    b_confirmation = true;
+                }
             }
             catch (Exception ex)
             {

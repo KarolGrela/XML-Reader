@@ -58,6 +58,12 @@
     <Compile Include="mainMenuForm.Designer.cs">
       <DependentUpon>mainMenuForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="popups\popupSuccessWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="popups\popupSuccessWindow.Designer.cs">
+      <DependentUpon>popupSuccessWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="popups\popupExceptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     </Compile>
     <EmbeddedResource Include="mainMenuForm.resx">
       <DependentUpon>mainMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popups\popupSuccessWindow.resx">
+      <DependentUpon>popupSuccessWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="popups\popupExceptionForm.resx">
       <DependentUpon>popupExceptionForm.cs</DependentUpon>

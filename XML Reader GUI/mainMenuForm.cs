@@ -325,6 +325,11 @@ namespace XML_Reader_GUI
             try
             {
                 reader = new XMLReader(path);
+                if(reader.b_confirmation==true)
+                {
+                    var popup = new popupSuccessWindow("!!!", "XML File read correctly", "");
+                    popup.Show();
+                }
             }
             catch (Exception ex)
             {
